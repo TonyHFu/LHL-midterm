@@ -9,6 +9,19 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
+
+  router.get("/", (req, res) => {
+    db.getAllMenuItems(req.body) // Need parameter change once query function written
+    .then(order => {
+      //Add API call to Twilio
+      res.send(order)
+    })
+    .catch(error => {
+      console.error(error);
+      res.send(error);
+    });
+  });
+
   router.get("/", (req, res) => {
     let query = `SELECT * FROM widgets`;
     console.log(query);
@@ -24,6 +37,4 @@ module.exports = (db) => {
       });
   });
   return router;
-
-
 };
