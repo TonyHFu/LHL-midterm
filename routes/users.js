@@ -15,6 +15,7 @@ module.exports = (db) => {
     res.redirect("/");
   });
 
+  //Lighthouse example
 
   // router.get("/", (req, res) => {
   //   db.query(`SELECT * FROM users;`)

@@ -11,46 +11,32 @@ const router  = express.Router();
 module.exports = (db) => {
 
   router.post("/", (req, res) => {
-    // db.insertOrder(req.body) // Need parameter change once query function written
-    //   .then(order => {
-    //     //Add API call to Twilio
-    //     res.send(order)
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //     res.send(error);
-    //   });
 
-    res.send("posted order");
+    const user_id = req.session.user_id;
+    res.send(`posted order for user ${user_id}`);
   });
 
   router.put("/:id", (req, res) => {
-    // db.putOrder(req.body) // Need parameter change once query function written
-    //   .then(order => {
-    //     //Add API call to Twilio
-    //     res.send(order)
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //     res.send(error);
-    //   });
-    res.send("edited order");
+
+    const user_id = req.session.user_id;
+    const order_id = req.params.id;
+
+    res.send(`edited order for user ${user_id} for order ${order_id}`);
+
 
   });
 
   router.delete("/:id", (req, res) => {
-    // db.removeOrder(req.body) // Need parameter change once query function written
-    //   .then(order => {
-    //     //Add API call to Twilio
-    //     res.send(order)
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //     res.send(error);
-    //   });
-    res.send("Deleted order");
+
+    const user_id = req.session.user_id;
+    const order_id = req.params.id;
+
+    res.send(`deleted order for user ${user_id} for order ${order_id}`);
+
   });
 
+
+  //Lighthouse example
 
   // router.get("/", (req, res) => {
   //   let query = `SELECT * FROM widgets`;
