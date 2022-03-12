@@ -65,7 +65,8 @@ app.use("/orders", ordersRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  // res.render("index");
+  res.send("home page");
 });
 
 app.listen(PORT, () => {

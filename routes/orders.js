@@ -20,6 +20,8 @@ module.exports = (db) => {
     //     console.error(error);
     //     res.send(error);
     //   });
+
+    res.send("posted order");
   });
 
   router.put("/:id", (req, res) => {
@@ -32,6 +34,8 @@ module.exports = (db) => {
     //     console.error(error);
     //     res.send(error);
     //   });
+    res.send("edited order");
+
   });
 
   router.delete("/:id", (req, res) => {
@@ -44,6 +48,7 @@ module.exports = (db) => {
     //     console.error(error);
     //     res.send(error);
     //   });
+    res.send("Deleted order");
   });
 
 
@@ -61,5 +66,5 @@ module.exports = (db) => {
   //         .json({ error: err.message });
   //     });
   // });
-  // return router;
+  return router;
 };
