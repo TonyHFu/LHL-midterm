@@ -10,7 +10,8 @@ const router  = express.Router();
 
 module.exports = (db) => {
 
-  router.get("/", (req, res) => {
+  router.post("/", (req, res) => {
+    //NEED CHANGING
     db.query(`
       SELECT * FROM menu_items;
     `)

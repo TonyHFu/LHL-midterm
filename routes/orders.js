@@ -11,9 +11,38 @@ const router  = express.Router();
 module.exports = (db) => {
 
   router.post("/", (req, res) => {
-
     const user_id = req.session.user_id;
+    //Assuming items like
+    // [
+    //   {
+    //     item_id: id,
+    //     quantity: quantity
+    //   },
+    //   {
+    //     item_id: id,
+    //     quantity: quantity
+    //   },
+    //   {
+    //     item_id: id,
+    //     quantity: quantity
+    //   },
+    // ]
     res.send(`posted order for user ${user_id}`);
+    db.query(`
+      INSERT INTO orders (customer_id, is_complete)
+      VALUES($1, false)
+      RETURNING *;
+    `, [user_id])
+    .then(order => {
+      res.send(order.rows);
+      return order.rows;
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+
   });
 
   router.put("/:id", (req, res) => {
