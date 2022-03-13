@@ -12,21 +12,7 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     const user_id = req.session.user_id;
-    //Assuming items like
-    // [
-    //   {
-    //     item_id: id,
-    //     quantity: quantity
-    //   },
-    //   {
-    //     item_id: id,
-    //     quantity: quantity
-    //   },
-    //   {
-    //     item_id: id,
-    //     quantity: quantity
-    //   },
-    // ]
+
     res.send(`posted order for user ${user_id}`);
     db.query(`
       INSERT INTO orders (customer_id, is_complete)

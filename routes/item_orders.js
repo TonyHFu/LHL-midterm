@@ -5,6 +5,7 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
+const { query } = require('express');
 const express = require('express');
 const router  = express.Router();
 
@@ -12,9 +13,51 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     //NEED CHANGING
-    db.query(`
-      SELECT * FROM menu_items;
-    `)
+    //Assuming items like
+    // [
+    //   {
+    //     item_id: id,
+    //     quantity: quantity
+    //   },
+    //   {
+    //     item_id: id,
+    //     quantity: quantity
+    //   },
+    //   {
+    //     item_id: id,
+    //     quantity: quantity
+    //   },
+    // ]
+    const order_id = req.body.order_id;
+    let queryString = `
+      INSERT INTO item_orders
+      (order_id, item_id, quantity)
+      VALUES
+    `;
+    const queryParams = [];
+    const queryParamCounter = 1;
+    req.body.items.forEach(item => {
+      queryString += `
+        ($${queryParamCounter}, $${queryParamCounter + 1}, $${queryParamCounter + 2}),`;
+      queryParams.push(order_id, item.item_id, item.quantity);
+      queryParamCounter += 3;
+    });
+
+    // let z =`
+    //   INSERT INTO item_orders
+    //   (order_id, item_id, quantity)
+    //   VALUES
+    // `;
+    // z +=
+    // `
+    //   (1,2,3),`;
+    // z+=
+    // `
+    //   (1,2,3),`;
+    queryString.slice(0, -1);
+    queryString += `
+      RETURNING *;`;
+    db.query(queryString, queryParams)
       .then(menuObj => {
         res.send(menuObj.rows);
         return menuObj.rows;
