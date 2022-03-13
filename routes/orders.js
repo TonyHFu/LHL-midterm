@@ -13,7 +13,7 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     const user_id = req.session.user_id;
 
-    res.send(`posted order for user ${user_id}`);
+    // res.send(`posted order for user ${user_id}`);
     db.query(`
       INSERT INTO orders (customer_id, is_complete)
       VALUES($1, false)
@@ -36,7 +36,7 @@ module.exports = (db) => {
     const user_id = req.session.user_id;
     const order_id = req.params.id;
 
-    res.send(`edited order for user ${user_id} for order ${order_id}`);
+    res.send(`completed order for user ${user_id} for order ${order_id}`);
   });
 
   router.delete("/:id", (req, res) => {

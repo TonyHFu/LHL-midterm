@@ -53,7 +53,7 @@ module.exports = (db) => {
       RETURNING *;
     `;
 
-    db.query(queryString, queryParams)
+    return db.query(queryString, queryParams)
       .then(item_orders => {
         res.send(item_orders.rows);
         return item_orders.rows;
@@ -73,7 +73,7 @@ module.exports = (db) => {
       RETURNING *;
     `;
     const queryParams = [item_order_id];
-    db.query(queryString, queryParams)
+    return db.query(queryString, queryParams)
       .then(item_orders => {
         res.send(item_orders.rows);
         return item_orders.rows;
@@ -95,7 +95,7 @@ module.exports = (db) => {
       RETURNING *;
     `;
     const queryParams = [newQuantity, item_order_id];
-    db.query(queryString, queryParams)
+    return db.query(queryString, queryParams)
       .then(item_orders => {
         res.send(item_orders.rows);
         return item_orders.rows;

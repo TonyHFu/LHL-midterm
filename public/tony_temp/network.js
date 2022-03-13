@@ -9,3 +9,9 @@ function addItemToOrder(data) {
   });
 };
 
+function deleteItemFromOrder(data) {
+  return $.ajax({
+    method: "DELETE",
+    url: "/item_orders/" + data.item_order_id
+  })
+}
