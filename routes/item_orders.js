@@ -28,6 +28,29 @@ module.exports = (db) => {
     //     quantity: quantity
     //   },
     // ]
+
+
+    //Fake variables for testing
+    // const req = {
+    //   body: {
+    //     order_id: 1,
+    //     items: [
+    //       {
+    //         item_id: 1,
+    //         quantity: 1
+    //       },
+    //       {
+    //         item_id: 2,
+    //         quantity: 2
+    //       },
+    //       {
+    //         item_id: 3,
+    //         quantity: 3
+    //       }
+    //     ]
+    //   }
+    // };
+
     const order_id = req.body.order_id;
     let queryString = `
       INSERT INTO item_orders
@@ -35,7 +58,7 @@ module.exports = (db) => {
       VALUES
     `;
     const queryParams = [];
-    const queryParamCounter = 1;
+    let queryParamCounter = 1;
     req.body.items.forEach(item => {
       queryString += `
         ($${queryParamCounter}, $${queryParamCounter + 1}, $${queryParamCounter + 2}),`;
@@ -56,11 +79,15 @@ module.exports = (db) => {
     //   (1,2,3),`;
     queryString.slice(0, -1);
     queryString += `
-      RETURNING *;`;
+      RETURNING *;
+    `;
+
+    // console.log("queryString", queryString);
+    // console.log("queryParams", queryParams);
     db.query(queryString, queryParams)
-      .then(menuObj => {
-        res.send(menuObj.rows);
-        return menuObj.rows;
+      .then(item_orders => {
+        res.send(item_orders.rows);
+        return item_orders.rows;
       })
       .catch(err => {
         res
