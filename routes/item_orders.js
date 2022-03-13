@@ -12,24 +12,6 @@ const router  = express.Router();
 module.exports = (db) => {
 
   router.post("/", (req, res) => {
-    //NEED CHANGING
-    //Assuming items like
-    // [
-    //   {
-    //     item_id: id,
-    //     quantity: quantity
-    //   },
-    //   {
-    //     item_id: id,
-    //     quantity: quantity
-    //   },
-    //   {
-    //     item_id: id,
-    //     quantity: quantity
-    //   },
-    // ]
-
-
     //Fake variables for testing
     // const req = {
     //   body: {
@@ -66,24 +48,11 @@ module.exports = (db) => {
       queryParamCounter += 3;
     });
 
-    // let z =`
-    //   INSERT INTO item_orders
-    //   (order_id, item_id, quantity)
-    //   VALUES
-    // `;
-    // z +=
-    // `
-    //   (1,2,3),`;
-    // z+=
-    // `
-    //   (1,2,3),`;
     queryString.slice(0, -1);
     queryString += `
       RETURNING *;
     `;
 
-    // console.log("queryString", queryString);
-    // console.log("queryParams", queryParams);
     db.query(queryString, queryParams)
       .then(item_orders => {
         res.send(item_orders.rows);
@@ -96,21 +65,47 @@ module.exports = (db) => {
       });
   });
 
-  //Lighthouse example
+  router.delete("/:id", (req, res) => {
+    const item_order_id = req.params.id;
+    let queryString = `
+      DELETE FROM item_orders
+      WHERE id = $1
+      RETURNING *;
+    `;
+    const queryParams = [item_order_id];
+    db.query(queryString, queryParams)
+      .then(item_orders => {
+        res.send(item_orders.rows);
+        return item_orders.rows;
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
 
-  // router.get("/", (req, res) => {
-  //   let query = `SELECT * FROM widgets`;
-  //   console.log(query);
-  //   db.query(query)
-  //     .then(data => {
-  //       const widgets = data.rows;
-  //       res.json({ widgets });
-  //     })
-  //     .catch(err => {
-  //       res
-  //         .status(500)
-  //         .json({ error: err.message });
-  //     });
-  // });
+  router.put("/:id", (req, res) => {
+    const item_order_id = req.params.id;
+    const newQuantity = req.body.quantity;
+    let queryString = `
+      UPDATE item_orders
+      SET quantity = $1
+      WHERE id = $2
+      RETURNING *;
+    `;
+    const queryParams = [newQuantity, item_order_id];
+    db.query(queryString, queryParams)
+      .then(item_orders => {
+        res.send(item_orders.rows);
+        return item_orders.rows;
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
   return router;
 };

@@ -37,8 +37,6 @@ module.exports = (db) => {
     const order_id = req.params.id;
 
     res.send(`edited order for user ${user_id} for order ${order_id}`);
-
-
   });
 
   router.delete("/:id", (req, res) => {
