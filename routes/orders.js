@@ -19,15 +19,15 @@ module.exports = (db) => {
       VALUES($1, false)
       RETURNING *;
     `, [user_id])
-    .then(order => {
-      res.send(order.rows);
-      return order.rows;
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+      .then(order => {
+        res.send(order.rows);
+        return order.rows;
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
 
   });
 
@@ -36,7 +36,22 @@ module.exports = (db) => {
     const user_id = req.session.user_id;
     const order_id = req.params.id;
 
-    res.send(`completed order for user ${user_id} for order ${order_id}`);
+    // res.send(`completed order for user ${user_id} for order ${order_id}`);
+
+    db.query(`
+      UPDATE orders
+      SET is_complete = true
+      WHERE id = $1
+      RETURNING *;
+    `, [order_id])
+      .then((order) => {
+        res.send(order.rows);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
   });
 
   router.delete("/:id", (req, res) => {
@@ -44,8 +59,20 @@ module.exports = (db) => {
     const user_id = req.session.user_id;
     const order_id = req.params.id;
 
-    res.send(`deleted order for user ${user_id} for order ${order_id}`);
-
+    // res.send(`deleted order for user ${user_id} for order ${order_id}`);
+    db.query(`
+      DELETE FROM orders
+      WHERE id = $1
+      RETURNING *;
+    `, [order_id])
+      .then((order) => {
+        res.send(order.rows);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error:err.message });
+      });
   });
 
 
