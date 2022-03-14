@@ -43,35 +43,27 @@
       background-color: red;
       border: 5px blue solid;
     }
+    .sidebar-footer {
+      height: auto;
+    }
   </style>
 
 
 </head>
 <body>
   <main>
-    <!-- <div class="menu-item" id="item1">
-      <figure>
-        <img src="/images/burger.jpeg">
-        <figcaption>A delicious burger made with 100% triple grade A beef</figcaption>
-      </figure>
-      <button class="add-to-order" type="submit">Add</button>
-    </div>
-
-    <div class="menu-item" id="item2">
-      <figure>
-        <img src="/images/fries.jpeg">
-        <figcaption>Fries made from russet potatoes</figcaption>
-      </figure>
-      <button class="add-to-order" type="submit">Add</button>
-    </div> -->
-
-
-
     <div class="order-sidebar">
       <h2>Orders</h2>
       <section class="order-sidebar-content">
 
       </section>
+      <footer class="sidebar-footer">
+        <p>Subtotal: <p id="subtotal"></p></p>
+        <p>Tax: <p id="tax"></p></p>
+        <p>Total: <p id="total"></p></p>
+
+        <button id="submit-order">Order</button>
+      </footer>
     </div>
   </main>
   <script type="text/javascript" src="/scripts/network.js"></script>

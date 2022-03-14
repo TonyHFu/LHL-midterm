@@ -29,25 +29,20 @@ $(() => {
     );
   }
 
-  //Async version
-  // function renderSidebar(orders) {
-  //   $(".order-sidebar").empty();
-  //   orders.forEach(order => {
-  //     getSingleMenuItem(order)
-  //       .then(order_item => {
-  //         listingOrderSidebar(order_item);
-  //       })
-  //       .catch(err => {
-  //         console.error(err);
-  //       });
-  //   });
-  // };
-
   function renderSidebar(orders) {
     $(".order-sidebar-content").empty();
+    let subtotal = 0;
     orders.forEach(order => {
       listingOrderSidebar(order);
+      subtotal += order.price_cents * order.quantity;
     });
+    $("#subtotal").text("$" + subtotal / 100);
+    const tax = Math.round(subtotal * 0.05);
+    $("#tax").text("$" + (tax / 100).toFixed(2));
+    const total = subtotal + tax;
+    $("#total").text("$" + (total / 100).toFixed(2));
+
+
   };
 
   window.sideBar.renderSidebar = renderSidebar;
