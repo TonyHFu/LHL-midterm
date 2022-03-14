@@ -5,6 +5,12 @@ function getAllMenuItems() {
   });
 };
 
+function getSingleMenuItem(data) {
+  return $.ajax({
+    url: "/menu/" + data.item_id
+  });
+};
+
 function postOrder(data) {
   return $.ajax({
     method: "POST",
@@ -18,7 +24,7 @@ function postOrder(data) {
 function putOrder(data) {
   return $.ajax({
     method: "PUT",
-    url: "/orders" + data.order_id,
+    url: "/orders/" + data.order_id,
     data: {
       is_complete: data.is_complete
     }
@@ -28,7 +34,7 @@ function putOrder(data) {
 function deleteOrder(data) {
   return $.ajax({
     method: "DELETE",
-    url: "/orders" + data.order_id
+    url: "/orders/" + data.order_id
   });
 };
 
