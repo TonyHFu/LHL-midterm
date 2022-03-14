@@ -4,7 +4,7 @@ $(() => {
 
   function listingOrderSidebar(order_item) {
     const {
-      id,
+      item_id,
       title,
       description,
       photo,
@@ -16,7 +16,7 @@ $(() => {
     } = order_item;
 
     $(".order-sidebar-content").append(`
-      <div class="order-item" id="order-item${id}">
+      <div class="order-item" id="order-item${item_id}">
         <figure>
           <img src=${photo}>
           <figcaption>${title}</figcaption>
@@ -24,9 +24,40 @@ $(() => {
         <p>price $${price_cents / 100}</p>
         <input type="number" id="quantity" name="quantity" min="1" value=${quantity}>
         <button class="remove-from-order" type="submit">Remove</button>
+
+        <div>
+          <span class="minus">
+              <button type="button">
+                <i class="fa-solid fa-minus"></i>
+              </button>
+          </span>
+          <input type="text" name="quant" value=${quantity} min="1">
+          <span class="plus">
+              <button type="button">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+          </span>
+        </div>
       </div>
     `
     );
+
+
+
+
+    $(`#order-item${item_id} .remove-from-order`).on("click", function(event) {
+      // alert($(event.target).parent().attr("id"));
+      // $(event.target).parent().remove();
+      const orders = JSON.parse(localStorage.getItem("orders"));
+
+      const updatedOrders = orders.filter(order => {
+        return order.item_id !== item_id;
+      });
+
+      localStorage.setItem("orders", JSON.stringify(updatedOrders));
+
+      renderSidebar(updatedOrders);
+    });
   }
 
   function renderSidebar(orders) {
@@ -41,7 +72,6 @@ $(() => {
     $("#tax").text("$" + (tax / 100).toFixed(2));
     const total = subtotal + tax;
     $("#total").text("$" + (total / 100).toFixed(2));
-
 
   };
 
