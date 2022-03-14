@@ -15,17 +15,7 @@ $(() => {
     } = order_item;
 
     $(".order-sidebar").append(`
-
-      <!-- <p>id: ${id}</p>
-      <p>title: ${title}</p>
-      <p>description: ${description}</p>
-      <p>photo: ${photo}</p>
-      <p>price_cents: ${price_cents}</p>
-      <p>in_stock: ${in_stock}</p>
-      <p>prep_time: ${prep_time}</p>
-      <p>type: ${type}</p> -->
-
-      <div class="menu-item" id="item1">
+      <div class="order-item" id="order-item${id}">
         <figure>
           <img src=${photo}>
           <figcaption>${title}</figcaption>

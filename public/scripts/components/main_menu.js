@@ -1,5 +1,4 @@
 $(() => {
-  localStorage.setItem("orders", "[]");
   function listSingleItem(menu) {
     const {
       id,
@@ -13,15 +12,6 @@ $(() => {
     } = menu;
 
     $("main").append(`
-      <!-- <p>id: ${id}</p>
-      <p>title: ${title}</p>
-      <p>description: ${description}</p>
-      <p>photo: ${photo}</p>
-      <p>price_cents: ${price_cents}</p>
-      <p>in_stock: ${in_stock}</p>
-      <p>prep_time: ${prep_time}</p>
-      <p>type: ${type}</p> -->
-
       <div class="menu-item" id="item-${id}">
         <figure>
           <img src=${photo}>
@@ -32,8 +22,13 @@ $(() => {
       </div>
     `
     );
+
+    //To integrate, will need to modify jquery selector
     $(`#item-${id} .add-to-order`).on("click", function(event) {
       // alert(`order ${id}`);
+      if (!localStorage.getItem("orders")) {
+        localStorage.setItem("orders", "[]");
+      }
       let orders = JSON.parse(localStorage.getItem("orders"));
       orders.push({
         item_id: id,
