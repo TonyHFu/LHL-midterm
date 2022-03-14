@@ -15,7 +15,7 @@ $(() => {
       quantity
     } = order_item;
 
-    $(".order-sidebar").append(`
+    $(".order-sidebar-content").append(`
       <div class="order-item" id="order-item${id}">
         <figure>
           <img src=${photo}>
@@ -44,7 +44,7 @@ $(() => {
   // };
 
   function renderSidebar(orders) {
-    $(".order-sidebar").empty();
+    $(".order-sidebar-content").empty();
     orders.forEach(order => {
       listingOrderSidebar(order);
     });

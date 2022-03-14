@@ -1,4 +1,8 @@
 $(() => {
+  if (localStorage.getItem("orders")) {
+    sideBar.renderSidebar(JSON.parse(localStorage.getItem("orders")));
+  }
+
   function listSingleItem(menu) {
     const {
       id,

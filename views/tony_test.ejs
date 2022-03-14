@@ -25,9 +25,15 @@
   <style>
     .order-sidebar {
       position: fixed;
+      width: 300px;
+      overflow-y: scroll;
       right: 0;
       top: 0;
+      bottom: 0;
       background-color: chocolate;
+    }
+    .order-sidebar h2 {
+      background-color: brown;
     }
     img {
       width: 100px;
@@ -61,7 +67,12 @@
 
 
 
-    <div class="order-sidebar"></div>
+    <div class="order-sidebar">
+      <h2>Orders</h2>
+      <section class="order-sidebar-content">
+
+      </section>
+    </div>
   </main>
   <script type="text/javascript" src="/scripts/network.js"></script>
   <script type="text/javascript" src="/scripts/components/order_sidebar.js"></script>
