@@ -11,13 +11,10 @@ function getSingleMenuItem(data) {
   });
 };
 
-function postOrder(data) {
+function postOrder() {
   return $.ajax({
     method: "POST",
-    url: "/orders",
-    data: {
-      user_id: data.user_id //not strictly necessary
-    }
+    url: "/orders"
   });
 };
 

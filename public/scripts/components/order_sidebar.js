@@ -1,3 +1,5 @@
+const orders = require("../../../routes/orders");
+
 $(() => {
 
   window.sideBar = {};
@@ -22,8 +24,6 @@ $(() => {
           <figcaption>${title}</figcaption>
         </figure>
         <p>price $${price_cents / 100}</p>
-        <input type="number" id="quantity" name="quantity" min="1" value=${quantity}>
-        <button class="remove-from-order" type="submit">Remove</button>
 
         <div>
           <span class="minus">
@@ -31,7 +31,7 @@ $(() => {
                 <i class="fa-solid fa-minus"></i>
               </button>
           </span>
-          <input type="text" name="quant" value=${quantity} min="1">
+          <input type="text" name="quant" id="quantity" value=${quantity} min="1">
           <span class="plus">
               <button type="button">
                 <i class="fa-solid fa-plus"></i>
@@ -39,15 +39,46 @@ $(() => {
           </span>
         </div>
       </div>
+
+      <button class="remove-from-order" type="submit">Remove</button>
+
     `
     );
 
+    $(`#order-item${item_id} .minus`).on("click", function(event) {
+      const orders = JSON.parse(localStorage.getItem("orders"));
+
+      for (let order of orders) {
+        if (order.item_id === item_id) {
+          if (order.quantity > 1) {
+            order.quantity --;
+          }
+        }
+      }
+
+      localStorage.setItem("orders", JSON.stringify(orders));
+
+      renderSidebar(orders);
+    })
+
+    $(`#order-item${item_id} .plus`).on("click", function(event) {
+      const orders = JSON.parse(localStorage.getItem("orders"));
+
+      for (let order of orders) {
+        if (order.item_id === item_id) {
+          order.quantity ++;
+        }
+      }
+
+      localStorage.setItem("orders", JSON.stringify(orders));
+
+      renderSidebar(orders);
+    })
 
 
 
     $(`#order-item${item_id} .remove-from-order`).on("click", function(event) {
-      // alert($(event.target).parent().attr("id"));
-      // $(event.target).parent().remove();
+
       const orders = JSON.parse(localStorage.getItem("orders"));
 
       const updatedOrders = orders.filter(order => {
@@ -59,6 +90,26 @@ $(() => {
       renderSidebar(updatedOrders);
     });
   }
+
+  $("#clear-cart").on("click", event => {
+    localStorage.clear();
+    $(".order-sidebar-content").empty();
+    $("#subtotal").text("$0");
+    $("#tax").text("$0");
+    $("#total").text("$0");
+  })
+
+  $("#submit-order").on("click", function(event) {
+    postOrder()
+      .then(order => {
+        const order_id = order[0].id;
+        orders = JSON.parse(localStorage.getItem("orders"));
+        orders.forEach(eachOrder => {
+
+        })
+
+      })
+  })
 
   function renderSidebar(orders) {
     $(".order-sidebar-content").empty();
@@ -75,16 +126,10 @@ $(() => {
 
   };
 
+
+
+
   window.sideBar.renderSidebar = renderSidebar;
-
-  $("#clear-cart").on("click", event => {
-    localStorage.clear();
-    $(".order-sidebar-content").empty();
-    $("#subtotal").text("$0");
-    $("#tax").text("$0");
-    $("#total").text("$0");
-  })
-
 });
 
 
