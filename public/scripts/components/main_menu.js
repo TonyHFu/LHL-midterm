@@ -12,7 +12,7 @@ $(() => {
       type
     } = menu;
 
-    $(".order-sidebar").append(`
+    $("main").append(`
       <!-- <p>id: ${id}</p>
       <p>title: ${title}</p>
       <p>description: ${description}</p>
@@ -38,8 +38,10 @@ $(() => {
   getAllMenuItems()
     .then(result => {
       // console.log("result", result);
-      console.log("result[0]", result[0]);
-      listingMenu(result[0]);
+      // console.log("result[0]", result[0]);
+      result.forEach(item => {
+        listingMenu(item);
+      })
     })
     .catch(err => {
       console.error(err);
