@@ -12,7 +12,7 @@ $(() => {
       type
     } = menu;
 
-    $("main").append(`
+    $(".order-sidebar").append(`
       <p>id: ${id}</p>
       <p>title: ${title}</p>
       <p>description: ${description}</p>
