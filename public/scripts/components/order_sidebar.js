@@ -47,6 +47,13 @@ $(() => {
 
   window.sideBar.renderSidebar = renderSidebar;
 
+  $("#clear-cart").on("click", event => {
+    localStorage.clear();
+    $(".order-sidebar-content").empty();
+    $("#subtotal").text("$0");
+    $("#tax").text("$0");
+    $("#total").text("$0");
+  })
 
 });
 
