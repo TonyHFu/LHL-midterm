@@ -11,7 +11,8 @@ $(() => {
       price_cents,
       in_stock,
       prep_time,
-      type
+      type,
+      quantity
     } = order_item;
 
     $(".order-sidebar").append(`
@@ -21,7 +22,7 @@ $(() => {
           <figcaption>${title}</figcaption>
         </figure>
         <p>price $${price_cents / 100}</p>
-        <input type="number" id="quantity" name="quantity" min="1" value=1>
+        <input type="number" id="quantity" name="quantity" min="1" value=${quantity}>
         <button class="remove-from-order" type="submit">Remove</button>
       </div>
     `

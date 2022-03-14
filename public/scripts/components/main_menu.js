@@ -23,31 +23,40 @@ $(() => {
     `
     );
 
-    //To integrate, will need to modify jquery selector
+    //To integrate, will need to modify jquery selector probably
     $(`#item-${id} .add-to-order`).on("click", function(event) {
-      // alert(`order ${id}`);
       if (!localStorage.getItem("orders")) {
         localStorage.setItem("orders", "[]");
       }
       let orders = JSON.parse(localStorage.getItem("orders"));
-      orders.push({
-        item_id: id,
-        title: title,
-        price_cents: price_cents,
-        quantity: 1,
-        photo: photo
-      });
+
+      let order_item_exists = false;
+      for (let order of orders) {
+        if (id === order.item_id) {
+          order.quantity += 1;
+          order_item_exists = true;
+        }
+      }
+      if (!order_item_exists) {
+        let quantity = 1;
+        orders.push({
+          item_id: id,
+          title: title,
+          price_cents: price_cents,
+          quantity: 1,
+          photo: photo,
+          quantity: quantity
+        });
+      }
+
       localStorage.setItem("orders", JSON.stringify(orders));
-      // alert(localStorage.getItem("orders"));
-      // alert("orders" + JSON.stringify(orders));
+
       sideBar.renderSidebar(orders);
     });
   }
 
   getAllMenuItems()
     .then(result => {
-      // console.log("result", result);
-      // console.log("result[0]", result[0]);
       result.forEach(item => {
         listSingleItem(item);
       })
