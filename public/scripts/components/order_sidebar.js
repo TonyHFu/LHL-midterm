@@ -1,5 +1,3 @@
-const orders = require("../../../routes/orders");
-
 $(() => {
 
   window.sideBar = {};
@@ -104,11 +102,20 @@ $(() => {
       .then(order => {
         const order_id = order[0].id;
         orders = JSON.parse(localStorage.getItem("orders"));
-        orders.forEach(eachOrder => {
 
-        })
-
+        return addItemsToOrder({
+              items: orders,
+              order_id: order_id
+        });
       })
+      .then(ordersSubmitted => {
+        console.log(ordersSubmitted);
+        alert("submitted!");
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+
   })
 
   function renderSidebar(orders) {

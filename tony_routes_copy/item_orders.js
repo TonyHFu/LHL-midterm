@@ -32,7 +32,6 @@ module.exports = (db) => {
     //     ]
     //   }
     // };
-
     const order_id = req.body.order_id;
     let queryString = `
       INSERT INTO item_orders
@@ -48,14 +47,14 @@ module.exports = (db) => {
       queryParamCounter += 3;
     });
 
-    queryString.slice(0, -1);
+    queryString = queryString.slice(0, -1);
     queryString += `
       RETURNING *;
     `;
 
-    return db.query(queryString, queryParams)
+
+    db.query(queryString, queryParams)
       .then(item_orders => {
-        res.send(item_orders.rows);
         return item_orders.rows;
       })
       .catch(err => {

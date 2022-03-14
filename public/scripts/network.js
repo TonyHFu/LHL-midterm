@@ -1,5 +1,4 @@
 function getAllMenuItems() {
-  console.log("getting menu");
   return $.ajax({
     url: "/menu",
   });
@@ -35,7 +34,7 @@ function deleteOrder(data) {
   });
 };
 
-function addItemToOrder(data) {
+function addItemsToOrder(data) {
   return $.ajax({
     method: "POST",
     url: "/item_orders",
