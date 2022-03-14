@@ -41,6 +41,7 @@ $(() => {
       });
       localStorage.setItem("orders", JSON.stringify(orders));
       // alert(localStorage.getItem("orders"));
+      // alert("orders" + JSON.stringify(orders));
       sideBar.renderSidebar(orders);
     });
   }

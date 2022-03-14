@@ -26,14 +26,14 @@ module.exports = (db) => {
   });
 
   router.get("/:id", (req, res) => {
-    const item_id = req.body.item_id;
+    const item_id = req.params.id;
     db.query(`
       SELECT * FROM menu_items
-      WHERE id = $1
+      WHERE id = $1;
     `, [item_id])
       .then(menu_item => {
-        res.send(menu_item.rows);
-        return menu_item.rows;
+        res.send(menu_item.rows[0]);
+        return menu_item.rows[0];
       })
       .catch(err => {
         res
