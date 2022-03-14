@@ -15,6 +15,7 @@ $(() => {
     } = order_item;
 
     $(".order-sidebar").append(`
+
       <!-- <p>id: ${id}</p>
       <p>title: ${title}</p>
       <p>description: ${description}</p>
@@ -37,31 +38,29 @@ $(() => {
     );
   }
 
-  function renderSidebar(orders) {
+  //Async version
+  // function renderSidebar(orders) {
+  //   $(".order-sidebar").empty();
+  //   orders.forEach(order => {
+  //     getSingleMenuItem(order)
+  //       .then(order_item => {
+  //         listingOrderSidebar(order_item);
+  //       })
+  //       .catch(err => {
+  //         console.error(err);
+  //       });
+  //   });
+  // };
 
+  function renderSidebar(orders) {
+    $(".order-sidebar").empty();
     orders.forEach(order => {
-      getSingleMenuItem(order)
-        .then(order_item => {
-          listingOrderSidebar(order_item);
-        })
-        .catch(err => {
-          console.error(err);
-        });
+      listingOrderSidebar(order);
     });
   };
 
-
   window.sideBar.renderSidebar = renderSidebar;
 
-  // getAllMenuItems()
-  //   .then(result => {
-  //     // console.log("result", result);
-  //     console.log("result[0]", result[0]);
-  //     listingOrderSidebar(result[0]);
-  //   })
-  //   .catch(err => {
-  //     console.error(err);
-  //   });
 
 });
 

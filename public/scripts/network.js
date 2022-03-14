@@ -6,10 +6,6 @@ function getAllMenuItems() {
 };
 
 function getSingleMenuItem(data) {
-  // alert(JSON.stringify(data));
-  // alert("/menu/" + data.item_id);
-  // debugger;
-  // alert()
   return $.ajax({
     url: "/menu/" + data.item_id
   });

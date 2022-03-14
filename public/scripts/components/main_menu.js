@@ -37,7 +37,10 @@ $(() => {
       let orders = JSON.parse(localStorage.getItem("orders"));
       orders.push({
         item_id: id,
-        quantity: 1
+        title: title,
+        price_cents: price_cents,
+        quantity: 1,
+        photo: photo
       });
       localStorage.setItem("orders", JSON.stringify(orders));
       // alert(localStorage.getItem("orders"));
