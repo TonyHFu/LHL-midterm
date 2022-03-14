@@ -1,6 +1,6 @@
 $(() => {
-
-  function listingMenu(menu) {
+  localStorage.setItem("orders", "[]");
+  function listSingleItem(menu) {
     const {
       id,
       title,
@@ -22,17 +22,27 @@ $(() => {
       <p>prep_time: ${prep_time}</p>
       <p>type: ${type}</p> -->
 
-      <div class="menu-item" id="item1">
+      <div class="menu-item" id="item-${id}">
         <figure>
           <img src=${photo}>
           <figcaption>${title}</figcaption>
         </figure>
         <p>price $${price_cents / 100}</p>
-        <input type="number" id="quantity" name="quantity" min="1" value=1>
-        <button class="remove-from-order" type="submit">Remove</button>
+        <button class="add-to-order" type="submit">Add</button>
       </div>
     `
     );
+    $(`#item-${id} .add-to-order`).on("click", function(event) {
+      // alert(`order ${id}`);
+      let orders = JSON.parse(localStorage.getItem("orders"));
+      orders.push({
+        item_id: id,
+        quantity: 1
+      });
+      localStorage.setItem("orders", JSON.stringify(orders));
+      // alert(localStorage.getItem("orders"));
+      sideBar.renderSidebar(orders);
+    });
   }
 
   getAllMenuItems()
@@ -40,12 +50,13 @@ $(() => {
       // console.log("result", result);
       // console.log("result[0]", result[0]);
       result.forEach(item => {
-        listingMenu(item);
+        listSingleItem(item);
       })
     })
     .catch(err => {
       console.error(err);
     });
+
 
 });
 

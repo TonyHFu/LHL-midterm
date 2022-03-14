@@ -1,6 +1,8 @@
 $(() => {
 
-  function listingMenu(menu) {
+  window.sideBar = {};
+
+  function listingOrderSidebar(order_item) {
     const {
       id,
       title,
@@ -10,7 +12,7 @@ $(() => {
       in_stock,
       prep_time,
       type
-    } = menu;
+    } = order_item;
 
     $(".order-sidebar").append(`
       <!-- <p>id: ${id}</p>
@@ -35,15 +37,31 @@ $(() => {
     );
   }
 
-  getAllMenuItems()
-    .then(result => {
-      // console.log("result", result);
-      console.log("result[0]", result[0]);
-      listingMenu(result[0]);
-    })
-    .catch(err => {
-      console.error(err);
+  function renderSidebar(orders) {
+
+    orders.forEach(order => {
+      getSingleMenuItem(order)
+        .then(order_item => {
+          listingOrderSidebar(order_item);
+        })
+        .catch(err => {
+          console.error(err);
+        });
     });
+  };
+
+
+  window.sideBar.renderSidebar = renderSidebar;
+
+  // getAllMenuItems()
+  //   .then(result => {
+  //     // console.log("result", result);
+  //     console.log("result[0]", result[0]);
+  //     listingOrderSidebar(result[0]);
+  //   })
+  //   .catch(err => {
+  //     console.error(err);
+  //   });
 
 });
 

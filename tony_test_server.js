@@ -48,10 +48,10 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
-const menuRoutes = require("./routes/menu");
-const ordersRoutes = require("./routes/orders");
-const itemOrdersRoutes = require("./routes/item_orders");
+const usersRoutes = require("./tony_routes_copy/users");
+const menuRoutes = require("./tony_routes_copy/menu");
+const ordersRoutes = require("./tony_routes_copy/orders");
+const itemOrdersRoutes = require("./tony_routes_copy/item_orders");
 
 
 // Mount all resource routes
