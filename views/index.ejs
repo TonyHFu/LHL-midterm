@@ -14,6 +14,10 @@
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@400;500&family=Sansita+Swashed&display=swap" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Bootstrap -->
@@ -24,67 +28,56 @@
 <body>
   <!-- Top nav bar (fixed???) -->
   <nav>
-    <div class="upper-nav">
-      <img src="/images/burger-icon.png" width="80" height="80">
-      <div><h2>BURGER PLACE</h2></div>
-      <div>SIGN IN</div>
+    <div id="logo">
+      <i id = "logo-img" class="fa-solid fa-burger-cheese"></i>
+      <h2>BURGER PLACE</h2>
     </div>
-    <div class="lower-nav">
-      <a>Entrees</a>
-      <a>Sides</a>
-      <a>Drinks</a>
-      <a>Desserts</a>
+    <div id="menu-nav">
+      <p class="item">Entrees</p>
+      <p class="item">Sides</p>
+      <p class="item">Drinks</p>
+      <p class="item">Desserts</p>
     </div>
+    <p id = "sign-in">SIGN IN<p>
   </nav>
 
   <!-- Page-specific (main) content here -->
-  <main class="container">
+  <main>
 
-    <section class="entrees-section">
+    <section class="menu">
+      <p class ="menu-title">Entrees</p>
+      <div class="title-items">
+        <div class="menu-item">
+          <p class = 'item-name'>Scorpion Gourmet Burger</p>
+          <figure>
+            <img class = "item-photo" src="https://images.ctfassets.net/oewsurrg31ok/1iXVHMMD4A2jWpc3jJ41DA/f4227523f43fb8cf562063e395bed9dd/Q3_Scorpion_Gourmet_Burger_21.png?w=1200&h=900&q=50&fm=webp">
+            <figcaption>Fire-grilled beef burger topped with Scorpion Pepper Sauce, Pepper-Jack, fried jalapeno coins, lettuce, tomatoes, pickles, red onions and jalapenos roasted in Scorpion sauce and roasted garlic aioli on a sesame seed bun</figcaption>
+          </figure>
+          <div class = "item-footer">
+            <p class = 'price'>$<%= 1779 /100%></p>
+            <button class="add-to-order" type="submit">Add</button>
+          </div>
+        </div>
 
-      <div class="menu-item" id="item1">
-        <figure>
-          <img src="/images/burger.jpeg">
-          <figcaption>A delicious burger made with 100% triple grade A beef</figcaption>
-        </figure>
-        <button class="add-to-order" type="submit">Add</button>
-      </div>
-
-      <div class="menu-item" id="item2">
-        <figure>
-          <img src="/images/fries.jpeg">
-          <figcaption>Fries made from russet potatoes</figcaption>
-        </figure>
-        <button class="add-to-order" type="submit">Add</button>
-      </div>
-
-      <div class="menu-item" id="item3">
-        <figure>
-          <img src="/images/drinks.jpeg">
-          <figcaption>Entree Three</figcaption>
-        </figure>
-        <button class="add-to-order" type="submit">Add</button>
-      </div>
-
-      <div class="menu-item" id="item4">
-        <figure>
-          <img src="/images/dessert.jpeg">
-          <figcaption>Entree Four</figcaption>
-        </figure>
-        <button class="add-to-order" type="submit">Add</button>
-      </div>
+        <div class="menu-item">
+          <p class = 'item-name'>Scorpion Gourmet Burger</p>
+          <figure>
+            <img class = "item-photo" src="https://images.ctfassets.net/oewsurrg31ok/1iXVHMMD4A2jWpc3jJ41DA/f4227523f43fb8cf562063e395bed9dd/Q3_Scorpion_Gourmet_Burger_21.png?w=1200&h=900&q=50&fm=webp">
+            <figcaption>Fire-grilled beef burger topped with Scorpion Pepper Sauce, Pepper-Jack, fried jalapeno coins, lettuce, tomatoes, pickles, red onions and jalapenos roasted in Scorpion sauce and roasted garlic aioli on a sesame seed bun</figcaption>
+          </figure>
+          <div class = "item-footer">
+            <p class = 'price'>$<%= 1779 /100%></p>
+            <button class="add-to-order" type="submit">Add</button>
+          </div>
+        </div>
 
     </section>
-
-    <div class="checkout">
-      <button id="checkout-button" type="submit">Checkout</button>
-    </div>
+    <button id="checkout-button" type="submit"><i class="fa-solid fa-cart-shopping fa-2x"></i></button>
 
   </main>
 
   <!-- Footer -->
   <footer>
-    <div class="footer-content">
       <div class="socials-links">
         <i class="fa-brands fa-twitter"></i>
         <i class="fa-brands fa-facebook"></i>
@@ -99,7 +92,6 @@
       <div class="footer-copyright">
         <small>©2022 Burger Place International All Rights Reserved</small>
       </div>
-    </div>
 
   </footer>
   <!-- Bootstrap JS and Popper link -->
