@@ -6,7 +6,7 @@ main {
   align-self: flex-start;
   background-color: #ffffff;
   color: #4d4d4d;
-  padding-top: 2em;
+  padding-top: 0.5em;
   // justify-content: center;
 
   #checkout-button {
@@ -19,6 +19,23 @@ main {
     width: 5em;
     height: 5em;
     size: 20px;
+  }
+
+  #menu-entrees {
+    padding-top: 150px;
+    margin-top: -150px;
+  }
+  #menu-sides {
+    padding-top: 150px;
+    margin-top: -150px;
+  }
+  #menu-drinks {
+    padding-top: 150px;
+    margin-top: -150px;
+  }
+  #menu-desserts {
+    padding-top: 150px;
+    margin-top: -150px;
   }
 
   .menu {
