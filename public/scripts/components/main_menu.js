@@ -4,7 +4,7 @@ $(() => {
   }
 
 
-  function listSingleItem(menu_item) {
+  function listSingleItem(menu_item, item_type) {
     const {
       id,
       title,
@@ -16,16 +16,7 @@ $(() => {
       type
     } = menu_item;
 
-    // <!--<div class="menu-item" id="item-${id}">
-    //   <figure>
-    //     <img src=${photo}>
-    //     <figcaption>${title}</figcaption>
-    //   </figure>
-    //   <p>price $${price_cents / 100}</p>
-    //   <button class="add-to-order" type="submit">Add</button>
-    // </div>-->
-
-    $(".title-items").append(`
+    $(`#${item_type}-items`).append(`
 
       <div class="menu-item" id="item-${id}">
           <p class='item-name'>${title}</p>
@@ -41,7 +32,6 @@ $(() => {
     `
     );
 
-    //To integrate, will need to modify jquery selector probably
     $(`#item-${id} .add-to-order`).on("click", function(event) {
       if (!localStorage.getItem("orders")) {
         localStorage.setItem("orders", "[]");
@@ -83,7 +73,7 @@ $(() => {
   getAllMenuItems()
     .then(result => {
       result.forEach(item => {
-        listSingleItem(item);
+        listSingleItem(item, item.type);
       })
     })
     .catch(err => {
