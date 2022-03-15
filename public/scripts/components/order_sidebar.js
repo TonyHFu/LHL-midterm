@@ -139,7 +139,9 @@ $(() => {
   };
 
 
-
+  $("#hide-sidebar").on("click", function(event) {
+    $(".order-sidebar").hide();
+  })
 
   window.sideBar.renderSidebar = renderSidebar;
 });

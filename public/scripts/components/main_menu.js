@@ -73,6 +73,13 @@ $(() => {
     });
   }
 
+  $("#checkout-button").on("click", function(event) {
+    $(".order-sidebar").show();
+  });
+
+
+
+
   getAllMenuItems()
     .then(result => {
       result.forEach(item => {

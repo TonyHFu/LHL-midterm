@@ -26,4 +26,16 @@
     height: auto;
   }
 
+  header {
+    display: flex;
+    flex-direction: row;
+
+    i {
+      font-size: 40px;
+    }
+  }
+
+  #hide-sidebar {
+    cursor: pointer;
+  }
 }
