@@ -8,7 +8,7 @@ const client = new twilio(accountSid, authToken);
 client.messages
   .create({
     body: 'Your order is ready for pickup!',
-    to: '+16137093672', // Cell phone number
-    from: '+17344363982', // Twilio number
+    to: process.env.PHONE_NUM, // Cell phone number
+    from: process.env.TWILIO_NUM, // Twilio number
   })
   .then((message) => console.log(message.sid));
