@@ -106,6 +106,7 @@ $(() => {
     postOrder()
       .then(order => {
         const order_id = order[0].id;
+        localStorage.setItem("order_id", order_id);
         orders = JSON.parse(localStorage.getItem("orders"));
 
         return addItemsToOrder({

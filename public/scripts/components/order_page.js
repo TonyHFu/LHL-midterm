@@ -1,6 +1,9 @@
 $(() => {
 
   const orders = JSON.parse(localStorage.getItem("orders"));
+  $(".orders").append(`
+    <p>Order ID: ${localStorage.getItem("order_id")}</p>
+  `);
   orders.forEach(order => {
     const {
       item_id,
