@@ -8,6 +8,40 @@
   background-color: white;
   z-index: 99;
   color: #4d4d4d;
+  font-family: 'Arima Madurai', sans-serif;
+
+
+
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    background-color: #4d4d4d;
+    color: #dddddd;
+    align-items: center;
+
+    i {
+      color: #dddddd;
+      font-size: 40px;
+      margin-right: 20px;
+    }
+
+    h2 {
+      padding-top: 0.4em;
+    }
+  }
+
+  .order-sidebar-content {
+    margin-top: 65px;
+  }
+
+
+  #hide-sidebar {
+    cursor: pointer;
+  }
 
 
   h2 {
@@ -21,6 +55,7 @@
     height: auto;
   }
 
+
   .order-item {
     padding-left: 20px;
     padding-bottom: 20px;
@@ -32,25 +67,9 @@
     height: auto;
     display: flex;
     flex-direction: column;
+    padding-top: 10px;
   }
 
-  header {
-    display: flex;
-    flex-direction: row;
-    background-color: #4d4d4d;
-    color: #dddddd;
-
-
-    i {
-      color: #dddddd;
-      font-size: 40px;
-      margin-right: 20px;
-    }
-  }
-
-  #hide-sidebar {
-    cursor: pointer;
-  }
 
   .quantity {
     width: 40px;
@@ -68,8 +87,45 @@
 
   .remove-from-order {
     background-color: #dddddd;
-    border-radius: 10px;
+    border-radius: 5px;
     color: #4d4d4d;
 
   }
+
+
+
+  .cost {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .total {
+    border-top: #4d4d4d 2px solid;
+  }
+
+  .cart-order {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    button {
+      font-family: 'Arima Madurai', sans-serif;
+      background-color: white;
+      border-radius: 5px;
+      color: #4d4d4d;
+    }
+  }
+
+  // #clear-cart {
+  //   background-color: red;
+  // }
+
+  // #submit-order {
+  //   background-color: green;
+  // }
 }

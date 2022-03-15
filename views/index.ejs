@@ -56,11 +56,16 @@
 
       </section>
       <footer class="sidebar-footer">
-        <p>Subtotal: <p id="subtotal"></p></p>
-        <p>Tax: <p id="tax"></p></p>
-        <p>Total: <p id="total"></p></p>
-        <button id="clear-cart">Clear Cart</button>
-        <button id="submit-order">Order</button>
+        <div class="cost">
+          <span>Subtotal: </span>
+          <span id="subtotal"></span>
+        </div>
+        <div class="cost">Tax: <span id="tax"></span></div>
+        <div class="cost total">Total: <span id="total"></span></div>
+        <div class="cart-order">
+          <button id="clear-cart">Clear Cart</button>
+          <button id="submit-order">Order</button>
+        </div>
       </footer>
     </section>
 
