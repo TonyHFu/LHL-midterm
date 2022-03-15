@@ -30,7 +30,7 @@ $(() => {
                 <i class="fa-solid fa-minus"></i>
               </button>
           </span>
-          <input type="text" name="quant" id="quantity" value=${quantity} min="1">
+          <input type="text" name="quant" class="quantity" value=${quantity} min="1" max="50">
           <span class="plus">
               <button type="button">
                 <i class="fa-solid fa-plus"></i>

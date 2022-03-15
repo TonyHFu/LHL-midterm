@@ -5,11 +5,13 @@
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: chocolate;
+  background-color: white;
   z-index: 99;
 
   h2 {
-    background-color: brown;
+    // background-color: brown;
+    color: #dddddd;
+
   }
 
   img {
@@ -17,25 +19,45 @@
     height: auto;
   }
 
-  .menu-item {
-    background-color: red;
-    border: 5px blue solid;
+  .order-item {
+    margin-left: 20px;
   }
 
   .sidebar-footer {
     height: auto;
+    display: flex;
+    flex-direction: column;
   }
 
   header {
     display: flex;
     flex-direction: row;
+    background-color: #4d4d4d;
+    color: #dddddd;
+
 
     i {
+      color: #dddddd;
       font-size: 40px;
+      margin-right: 20px;
     }
   }
 
   #hide-sidebar {
     cursor: pointer;
+  }
+
+  .quantity {
+    width: 40px;
+  }
+
+  .plus button {
+    border: none;
+    background-color: white;
+  }
+
+  .minus button {
+    border: none;
+    background-color: white;
   }
 }
