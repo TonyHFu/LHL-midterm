@@ -1,7 +1,12 @@
 $(() => {
+  $(".order-sidebar").hide();
+
   if (localStorage.getItem("orders")) {
+    $(".order-sidebar").show();
     sideBar.renderSidebar(JSON.parse(localStorage.getItem("orders")));
+
   }
+
 
 
   function listSingleItem(menu_item, item_type) {

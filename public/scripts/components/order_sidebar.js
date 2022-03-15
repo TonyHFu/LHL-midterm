@@ -96,6 +96,7 @@ $(() => {
     $("#subtotal").text("$0");
     $("#tax").text("$0");
     $("#total").text("$0");
+    $("#checkout-button").removeClass("cart-ready");
   })
 
   $("#submit-order").on("click", function(event) {
@@ -135,7 +136,10 @@ $(() => {
     $("#tax").text("$" + (tax / 100).toFixed(2));
     const total = subtotal + tax;
     $("#total").text("$" + (total / 100).toFixed(2));
-
+    if (orders.length > 0) {
+      return $("#checkout-button").addClass("cart-ready");
+    }
+    $("#checkout-button").removeClass("cart-ready");
   };
 
 
