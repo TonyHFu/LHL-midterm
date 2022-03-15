@@ -22,7 +22,7 @@ $(() => {
           <img src=${photo}>
           <figcaption>${title}</figcaption>
         </figure>
-        <p>price $${price_cents / 100}</p>
+        <p>cost $${price_cents * quantity / 100}</p>
 
         <div>
           <span class="minus">
