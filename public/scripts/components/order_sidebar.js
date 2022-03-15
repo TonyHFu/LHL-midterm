@@ -36,8 +36,8 @@ $(() => {
                 <i class="fa-solid fa-plus"></i>
               </button>
           </span>
+          <button class="remove-from-order" type="submit">Remove</button>
         </div>
-        <button class="remove-from-order" type="submit">Remove</button>
       </div>
 
 
