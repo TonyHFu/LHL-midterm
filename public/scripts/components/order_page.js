@@ -18,6 +18,14 @@ $(() => {
       <p>price_cents: ${price_cents}</p>
       <p>quantity: ${quantity}</p>
       <p>title: ${title}</p>
+      <div class="menu-item" id="item-${item_id}">
+        <figure>
+          <img src=${photo}>
+          <figcaption>${title}</figcaption>
+        </figure>
+        <p>price $${price_cents / 100}</p>
+        <button class="add-to-order" type="submit">Add</button>
+      </div>
     `);
 
   });

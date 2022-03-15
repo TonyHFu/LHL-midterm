@@ -2,6 +2,7 @@ function getAllMenuItems() {
   return $.ajax({
     url: "/api/menu",
   });
+
 };
 
 function getSingleMenuItem(data) {

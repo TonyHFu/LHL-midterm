@@ -20,15 +20,13 @@ module.exports = (db) => {
       RETURNING *;
     `, [user_id])
       .then(order => {
-        res.send(order.rows);
-        return order.rows;
+        res.json(order.rows);
       })
       .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
       });
-
   });
 
   router.put("/:id", (req, res) => {
@@ -45,7 +43,7 @@ module.exports = (db) => {
       RETURNING *;
     `, [order_id])
       .then((order) => {
-        res.send(order.rows);
+        res.json(order.rows);
       })
       .catch(err => {
         res
@@ -66,7 +64,7 @@ module.exports = (db) => {
       RETURNING *;
     `, [order_id])
       .then((order) => {
-        res.send(order.rows);
+        res.json(order.rows);
       })
       .catch(err => {
         res
@@ -75,22 +73,5 @@ module.exports = (db) => {
       });
   });
 
-
-  //Lighthouse example
-
-  // router.get("/", (req, res) => {
-  //   let query = `SELECT * FROM widgets`;
-  //   console.log(query);
-  //   db.query(query)
-  //     .then(data => {
-  //       const widgets = data.rows;
-  //       res.json({ widgets });
-  //     })
-  //     .catch(err => {
-  //       res
-  //         .status(500)
-  //         .json({ error: err.message });
-  //     });
-  // });
   return router;
 };

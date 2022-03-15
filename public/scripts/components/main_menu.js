@@ -3,7 +3,8 @@ $(() => {
     sideBar.renderSidebar(JSON.parse(localStorage.getItem("orders")));
   }
 
-  function listSingleItem(menu) {
+
+  function listSingleItem(menu_item) {
     const {
       id,
       title,
@@ -13,7 +14,8 @@ $(() => {
       in_stock,
       prep_time,
       type
-    } = menu;
+    } = menu_item;
+
 
     $("main").append(`
       <div class="menu-item" id="item-${id}">

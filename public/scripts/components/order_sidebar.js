@@ -2,6 +2,7 @@ $(() => {
 
   window.sideBar = {};
 
+
   function listingOrderSidebar(order_item) {
     const {
       item_id,
@@ -101,7 +102,6 @@ $(() => {
     if (!localStorage.getItem("orders") || JSON.parse(localStorage.getItem("orders")).length === 0) {
       return alert("Your order is empty!");
     }
-
 
     postOrder()
       .then(order => {
