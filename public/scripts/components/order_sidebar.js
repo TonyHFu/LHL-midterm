@@ -90,7 +90,7 @@ $(() => {
   }
 
   $("#clear-cart").on("click", event => {
-    localStorage.clear();
+    localStorage.removeItem("orders");
     $(".order-sidebar-content").empty();
     $("#subtotal").text("$0");
     $("#tax").text("$0");
@@ -98,6 +98,11 @@ $(() => {
   })
 
   $("#submit-order").on("click", function(event) {
+    if (!localStorage.getItem("orders") || JSON.parse(localStorage.getItem("orders")).length === 0) {
+      return alert("Your order is empty!");
+    }
+
+
     postOrder()
       .then(order => {
         const order_id = order[0].id;
