@@ -15,8 +15,7 @@ module.exports = (db) => {
       SELECT * FROM menu_items;
     `)
       .then(menuObj => {
-        res.send(menuObj.rows);
-        return menuObj.rows;
+        res.json(menuObj.rows);
       })
       .catch(err => {
         res
@@ -32,8 +31,7 @@ module.exports = (db) => {
       WHERE id = $1;
     `, [item_id])
       .then(menu_item => {
-        res.send(menu_item.rows[0]);
-        return menu_item.rows[0];
+        res.json(menu_item.rows[0]);
       })
       .catch(err => {
         res
