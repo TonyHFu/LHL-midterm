@@ -109,8 +109,7 @@ $(() => {
         });
       })
       .then(ordersSubmitted => {
-        console.log(ordersSubmitted);
-        alert("submitted!");
+        window.location.href = "/order";
       })
       .catch(err => {
         console.log(err.message);

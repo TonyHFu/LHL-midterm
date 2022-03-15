@@ -55,7 +55,7 @@ module.exports = (db) => {
 
     db.query(queryString, queryParams)
       .then(item_orders => {
-        return item_orders.rows;
+        res.json(item_orders.rows);
       })
       .catch(err => {
         res
