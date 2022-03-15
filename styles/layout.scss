@@ -1,12 +1,12 @@
 // See: https://sass-lang.com/
 
-body,
-html {
-  box-sizing: border-box;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
+//body,
+//html {
+//  box-sizing: border-box;
+//  margin: 0;
+ // display: flex;
+//  flex-direction: column;
+//}
 
 // *, *:before, *:after {
 //   box-sizing: inherit;
@@ -14,22 +14,12 @@ html {
 
 body {
   color: black;
-  background-color: #f4f1ec;
+  background-color: #C4D6B0 !important;
   font-size: 24px;
-  // font-family: 'Source Sans Pro', sans-serif;
-}
-
-main {
-  width: 90%;
+  font-family: 'Arima Madurai', sans-serif;
   display: flex;
   flex-direction: column;
-  margin: 20px;
-  margin-top: 200px;
-  padding: 2em;
-  background-color: #e9e947;
-  // justify-content: center;
 }
 
-.checkout {
-  align-self: end;
-}
+
+

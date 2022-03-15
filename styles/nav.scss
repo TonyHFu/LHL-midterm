@@ -1,23 +1,46 @@
 nav {
+  height: 150px;
+  width: 100%;
+  background-color: #dddddd;
+  color: #4d4d4d;
+  font-family: 'Arima Madurai', sans-serif;
+  display: flex;
   position: fixed;
   z-index: 10;
   top: 0;
-  height: 200px;
-  width: 100%;
-  background-color: rgb(201, 19, 19);
-  // background-image: url("https://www.transparenttextures.com/patterns/fresh-snow.png");
-  color: #000000;
-  display: flex;
-  flex-direction: column;
-  padding: 1em;
-}
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1em;
+  padding-right: 1em;
 
-.upper-nav {
-  display: flex;
-  justify-content: space-evenly;
-}
+  #logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 1em;
+  }
 
-.lower-nav {
-  display: flex;
-  justify-content: space-around;
+  #menu-nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 60%;
+    align-self: flex-end;
+    align-items: flex-end;
+    height: 100px;
+    font-family: 'Sansita Swashed', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+  }
+
+  #sign-in {
+  font-size: 20px;
+  margin-right: 0px;
+  justify-self: flex-end;
+  }
+
+  .item:hover {
+    color: #000000;
+  }
 }

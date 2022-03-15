@@ -1,17 +1,97 @@
-body {
+main {
+  width: 80%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  flex-direction: column;
+  margin-top: 150px;
+  align-self: flex-start;
+  background-color: #ffffff;
+  color: #4d4d4d;
+  padding-top: 2em;
+  // justify-content: center;
 
-  background: rgb(163, 208, 219);
-  background: linear-gradient(
-    227deg,
-    rgba(163, 208, 219, 1) 0%,
-    rgba(163, 176, 219, 1) 20%,
-    rgba(163, 173, 219, 1) 34%,
-    rgba(163, 219, 208, 1) 59%,
-    rgba(163, 208, 219, 1) 74%,
-    rgba(163, 208, 219, 1) 100%
-  );
+  #checkout-button {
+    position: fixed;
+    right: 40px;
+    bottom: 20px;
+    border-radius: 40%;
+    background-color: #dddddd;
+    outline: none;
+    width: 5em;
+    height: 5em;
+    size: 20px;
+  }
+
+  .menu {
+    font-family: 'Arima Madurai', sans-serif;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    .menu-title {
+      font-weight: 500;
+      font-size: 75px;
+    }
+    .title-items {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+
+
+      .menu-item {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-left: 1em;
+        margin-left: 2em;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #dddddd;
+
+        .item-name {
+          font-family: 'Sansita Swashed', sans-serif;
+          font-size: 25px;
+        }
+
+        figure{
+          display: flex;
+          align-items: center;
+
+          .item-photo {
+            max-height: 180px;
+            max-width: 180px;
+            margin-right: 30px;
+            border-radius: 50%;
+            border: 1px solid #dddddd;
+            padding: 3px;
+          }
+        }
+        .item-footer {
+          display:flex;
+          flex-direction: row;
+          justify-content: space-between;
+          width:100%;
+          font-family:'Sansita Swashed', sans-serif;
+          .price {
+            margin-top: 10px;
+            font-size: 20px;
+            justify-self:flex-start;
+            align-self: center;
+          }
+          .add-to-order{
+            border: none;
+            background: transparent;
+            font-size: 25px;
+
+          }
+          .add-to-order:hover {
+            font-size:30px;
+          }
+        }
+      }
+    }
+  }
 }
+
+
