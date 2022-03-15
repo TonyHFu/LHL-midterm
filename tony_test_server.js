@@ -71,6 +71,10 @@ app.get("/", (req, res) => {
   res.render("tony_test");
 });
 
+app.get("/order", (req, res) => {
+  res.render("tony_order");
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
