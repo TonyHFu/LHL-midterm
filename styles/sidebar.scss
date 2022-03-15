@@ -1,0 +1,29 @@
+.order-sidebar {
+  position: fixed;
+  width: 300px;
+  overflow-y: scroll;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: chocolate;
+  z-index: 99;
+
+  h2 {
+    background-color: brown;
+  }
+
+  img {
+    width: 100px;
+    height: auto;
+  }
+
+  .menu-item {
+    background-color: red;
+    border: 5px blue solid;
+  }
+
+  .sidebar-footer {
+    height: auto;
+  }
+
+}

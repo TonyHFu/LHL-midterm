@@ -43,4 +43,17 @@ nav {
   .item:hover {
     color: #000000;
   }
+
+  #checkout-button {
+    // position: fixed;
+    // right: 40px;
+    // bottom: 20px;
+    // border-radius: 100%;
+    background-color: #dddddd;
+    outline: none;
+    width: 5em;
+    height: 5em;
+    size: 20px;
+    border: none;
+  }
 }

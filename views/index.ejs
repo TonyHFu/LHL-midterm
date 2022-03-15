@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
   <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/sidebar.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
@@ -39,15 +40,31 @@
       <p class="item">Desserts</p>
     </div>
     <p id = "sign-in">SIGN IN<p>
+    <button id="checkout-button" type="submit"><i class="fa-solid fa-cart-shopping fa-2x"></i></button>
+
   </nav>
 
   <!-- Page-specific (main) content here -->
   <main>
 
+    <section class="order-sidebar">
+      <h2>Orders</h2>
+      <section class="order-sidebar-content">
+
+      </section>
+      <footer class="sidebar-footer">
+        <p>Subtotal: <p id="subtotal"></p></p>
+        <p>Tax: <p id="tax"></p></p>
+        <p>Total: <p id="total"></p></p>
+        <button id="clear-cart">Clear Cart</button>
+        <button id="submit-order">Order</button>
+      </footer>
+    </section>
+
     <section class="menu">
       <p class ="menu-title">Entrees</p>
       <div class="title-items">
-        <div class="menu-item">
+        <!-- <div class="menu-item">
           <p class = 'item-name'>Scorpion Gourmet Burger</p>
           <figure>
             <img class = "item-photo" src="https://images.ctfassets.net/oewsurrg31ok/1iXVHMMD4A2jWpc3jJ41DA/f4227523f43fb8cf562063e395bed9dd/Q3_Scorpion_Gourmet_Burger_21.png?w=1200&h=900&q=50&fm=webp">
@@ -69,10 +86,10 @@
             <p class = 'price'>$<%= 1779 /100%></p>
             <button class="add-to-order" type="submit">Add</button>
           </div>
-        </div>
+        </div> -->
+      </div>
 
     </section>
-    <button id="checkout-button" type="submit"><i class="fa-solid fa-cart-shopping fa-2x"></i></button>
 
   </main>
 
@@ -96,6 +113,9 @@
   </footer>
   <!-- Bootstrap JS and Popper link -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="/scripts/network.js"></script>
+  <script type="text/javascript" src="/scripts/components/order_sidebar.js"></script>
+  <script type="text/javascript" src="/scripts/components/main_menu.js"></script>
 </body>
 
 </html>

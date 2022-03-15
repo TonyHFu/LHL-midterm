@@ -16,16 +16,28 @@ $(() => {
       type
     } = menu_item;
 
+    // <!--<div class="menu-item" id="item-${id}">
+    //   <figure>
+    //     <img src=${photo}>
+    //     <figcaption>${title}</figcaption>
+    //   </figure>
+    //   <p>price $${price_cents / 100}</p>
+    //   <button class="add-to-order" type="submit">Add</button>
+    // </div>-->
 
-    $("main").append(`
+    $(".title-items").append(`
+
       <div class="menu-item" id="item-${id}">
-        <figure>
-          <img src=${photo}>
-          <figcaption>${title}</figcaption>
-        </figure>
-        <p>price $${price_cents / 100}</p>
-        <button class="add-to-order" type="submit">Add</button>
-      </div>
+          <p class='item-name'>${title}</p>
+          <figure>
+            <img class = "item-photo" src=${photo}>
+            <figcaption>${description}</figcaption>
+          </figure>
+          <div class="item-footer">
+            <p class='price'>$${price_cents / 100}</p>
+            <button class="add-to-order" type="submit">Add</button>
+          </div>
+        </div>
     `
     );
 
