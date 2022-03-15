@@ -15,8 +15,7 @@ module.exports = (db) => {
       SELECT * FROM menu_items;
     `)
       .then(menuObj => {
-        res.send(menuObj.rows);
-        return menuObj.rows;
+        res.json(menuObj.rows);
       })
       .catch(err => {
         res
@@ -24,6 +23,22 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+  router.get("/:id", (req, res) => {
+    const item_id = req.params.id;
+    db.query(`
+      SELECT * FROM menu_items
+      WHERE id = $1;
+    `, [item_id])
+      .then(menu_item => {
+        res.json(menu_item.rows[0]);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  })
 
   return router;
 };
