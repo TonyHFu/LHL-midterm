@@ -4,6 +4,7 @@ $(() => {
   $(".orders").append(`
     <p>Order ID: ${localStorage.getItem("order_id")}</p>
   `);
+  let subtotal = 0;
   orders.forEach(order => {
     const {
       item_id,
@@ -13,20 +14,39 @@ $(() => {
       title
     } = order;
     $(".orders").append(`
-      <p>item_id: ${item_id}</p>
-      <p>photo: ${photo}</p>
-      <p>price_cents: ${price_cents}</p>
-      <p>quantity: ${quantity}</p>
-      <p>title: ${title}</p>
-      <div class="menu-item" id="item-${item_id}">
-        <figure>
-          <img src=${photo}>
-          <figcaption>${title}</figcaption>
-        </figure>
-        <p>price $${price_cents / 100}</p>
-        <button class="add-to-order" type="submit">Add</button>
-      </div>
+    <p>Item: ${title}</p>
+    <p>Price: $${price_cents / 100}</p>
     `);
 
+    subtotal += order.price_cents * order.quantity;
+    $("#subtotal").text("$" + subtotal / 100);
+    const tax = Math.round(subtotal * 0.05);
+    $("#tax").text("$" + (tax / 100).toFixed(2));
+    const total = subtotal + tax;
+    $("#total").text("$" + (total / 100).toFixed(2));
   });
+
+  $('.cancel-order').on("click", function(event) {
+    front end --> backend
+    client (browser) html css, client js
+
+
+    server, routes, db
+
+    make request (Network AJAX)
+      which order, delete
+      delete /orders/:id
+        delete from db
+        notification to owner (twilio)
+
+
+
+    ->backend
+    delete order (orders array)
+  });
+
+
+
+
+
 });

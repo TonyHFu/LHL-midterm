@@ -72,7 +72,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/order", (req, res) => {
-  res.render("tony_order");
+  res.render("order_page");
 });
 
 app.listen(PORT, () => {
