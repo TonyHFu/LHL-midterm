@@ -1,5 +1,4 @@
 $(() => {
-
   const orders = JSON.parse(localStorage.getItem("orders"));
   $(".orders").append(`
     <p>Order ID: ${localStorage.getItem("order_id")}</p>
@@ -27,26 +26,20 @@ $(() => {
   });
 
   $('.cancel-order').on("click", function(event) {
-    front end --> backend
-    client (browser) html css, client js
+    const orderId = {
+      'order_id': JSON.parse(localStorage.getItem('order_id'))
+    };
+    console.log(orderId.order_id);
 
+    deleteOrder(orderId)
+      .then(orders => {
+        console.log('order deleted');
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+      //notification to owner (twilio)
 
-    server, routes, db
-
-    make request (Network AJAX)
-      which order, delete
-      delete /orders/:id
-        delete from db
-        notification to owner (twilio)
-
-
-
-    ->backend
-    delete order (orders array)
   });
-
-
-
-
 
 });
