@@ -77,11 +77,17 @@ $(() => {
     })
 
     $(`#order-item${item_id} .quantity`).on("change", function(event) {
+      const orders = JSON.parse(localStorage.getItem("orders"));
+
       $(`#order-item${item_id} .quantity-error`).hide();
       if ($(this).val() < 1 || $(this).val() > 50) {
+        for (let order of orders) {
+          if (order.item_id === item_id) {
+            $(this).val(order.quantity);
+          }
+        }
         return $(`#order-item${item_id} .quantity-error`).show();
       }
-      const orders = JSON.parse(localStorage.getItem("orders"));
 
       for (let order of orders) {
         if (order.item_id === item_id) {
