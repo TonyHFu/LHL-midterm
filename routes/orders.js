@@ -7,7 +7,7 @@
 
 const express = require('express');
 const router  = express.Router();
-const { client } = require('../tony_test_server.js');
+const { client } = require('../server.js');
 module.exports = (db) => {
 
   router.post("/", (req, res) => {

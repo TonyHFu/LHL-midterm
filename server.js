@@ -9,13 +9,13 @@ const app = express();
 const morgan = require("morgan");
 const cookieSession = require('cookie-session');
 
-//twilio
+//Twilio
 const twilio = require('twilio');
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = new twilio(accountSid, authToken);
-
+module.exports = { client };
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
@@ -74,6 +74,10 @@ app.use("/api/item_orders", itemOrdersRoutes(db));
 
 app.get("/", (req, res) => {
   res.render("index");
+});
+
+app.get("/order", (req, res) => {
+  res.render("order_page");
 });
 
 app.listen(PORT, () => {
