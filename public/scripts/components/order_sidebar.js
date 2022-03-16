@@ -23,7 +23,11 @@ $(() => {
           <figcaption>${title}</figcaption>
         </figure>
         <p>cost $${price_cents * quantity / 100}</p>
-        <p class="quantity-error">Must be between 1 and 50</p>
+        <p class="quantity-error">
+          Must be between 1 and 50
+          <i class="fa-solid fa-square-xmark remove-error"></i>
+        </p>
+
         <div>
           <span class="minus">
               <button type="button">
@@ -98,7 +102,11 @@ $(() => {
       localStorage.setItem("orders", JSON.stringify(orders));
 
       renderSidebar(orders);
-    })
+    });
+
+    $(`#order-item${item_id} .remove-error`).on("click", function(event) {
+      $(`#order-item${item_id} .quantity-error`).hide();
+    });
 
     $(`#order-item${item_id} .remove-from-order`).on("click", function(event) {
 
@@ -181,7 +189,9 @@ $(() => {
 
   $("#hide-sidebar").on("click", function(event) {
     $(".order-sidebar").hide();
-  })
+  });
+
+
 
   window.sideBar.renderSidebar = renderSidebar;
 });

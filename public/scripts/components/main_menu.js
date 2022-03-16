@@ -67,6 +67,8 @@ $(() => {
       localStorage.setItem("orders", JSON.stringify(orders));
 
       sideBar.renderSidebar(orders);
+      $(".order-sidebar").show();
+
     });
   }
 
