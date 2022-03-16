@@ -2,7 +2,7 @@ $(() => {
 
   window.sideBar = {};
 
-
+  //Main Inner Function
   function listingOrderSidebar(order_item) {
     const {
       item_id,
@@ -46,6 +46,7 @@ $(() => {
     `
     );
 
+    //Minus Event
     $(`#order-item${item_id} .minus`).on("click", function(event) {
       const orders = JSON.parse(localStorage.getItem("orders"));
 
@@ -62,6 +63,7 @@ $(() => {
       renderSidebar(orders);
     })
 
+    //Plus Event
     $(`#order-item${item_id} .plus`).on("click", function(event) {
       const orders = JSON.parse(localStorage.getItem("orders"));
 
@@ -78,6 +80,7 @@ $(() => {
       renderSidebar(orders);
     })
 
+    //Quantity change Event
     $(`#order-item${item_id} .quantity`).on("change", function(event) {
       const orders = JSON.parse(localStorage.getItem("orders"));
 
@@ -102,10 +105,12 @@ $(() => {
       renderSidebar(orders);
     });
 
+    //Remove-error Event
     $(`#order-item${item_id} .remove-error`).on("click", function(event) {
       $(`#order-item${item_id} .quantity-error`).hide();
     });
 
+    //Remove from order Event
     $(`#order-item${item_id} .remove-from-order`).on("click", function(event) {
 
       const orders = JSON.parse(localStorage.getItem("orders"));
@@ -120,6 +125,7 @@ $(() => {
     });
   }
 
+  //Clear cart Event
   $("#clear-cart").on("click", event => {
     localStorage.removeItem("orders");
     $(".order-sidebar-content").empty();
@@ -129,6 +135,7 @@ $(() => {
     $("#checkout-button").removeClass("cart-ready");
   })
 
+  //Submit order Event
   $("#submit-order").on("click", function(event) {
     if (!localStorage.getItem("orders") || JSON.parse(localStorage.getItem("orders")).length === 0) {
       return alert("Your order is empty!");
@@ -166,6 +173,7 @@ $(() => {
 
   });
 
+  //Main outer function
   function renderSidebar(orders) {
 
     if (localStorage.getItem("order_id")) {
