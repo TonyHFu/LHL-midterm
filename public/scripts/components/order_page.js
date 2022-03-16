@@ -183,13 +183,23 @@ $(() => {
     clearInterval(displayEstimatedTime);
     $(".time-estimate").empty();
     $(".to-completion").text("Your order is complete!");
-    localStorage.removeItem("order_id");
-    localStorage.removeItem("orders");
+
     $(".orders").empty();
     $('body').find("p")[1].remove();
     $('body').find("p").slice(2, 12).remove();
     $('button').remove();
 
+    const order_id = localStorage.getItem("order_id");
+
+    putOrder({
+      order_id: order_id,
+      is_complete: true
+    });
+
+
+
+    localStorage.removeItem("order_id");
+    localStorage.removeItem("orders");
   }, estimatedTime * 1000);
 
 

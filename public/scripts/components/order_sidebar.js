@@ -181,28 +181,30 @@ $(() => {
     };
     console.log(orderId.order_id);
 
-    deleteOrder(orderId)
-      .then(orders => {
-        console.log('order deleted');
-        localStorage.removeItem("order_id");
-        return postOrder();
-      })
-      .then(order => {
-        const orders = JSON.parse(localStorage.getItem("orders"));
-        const order_id = order[0].id;
-        localStorage.setItem("order_id", order_id);
-        return addItemsToOrder({
-              items: orders,
-              order_id: order_id
-        });
-      })
-      .then(ordersSubmitted => {
-        window.location.href = "/order";
-      })
-      .catch(err => {
-        console.log(err.message);
-      });
-      //notification to owner (twilio)
+    // deleteOrder(orderId)
+    //   .then(orders => {
+    //     console.log('order deleted');
+    //     localStorage.removeItem("order_id");
+    //     return postOrder();
+    //   })
+    //   .then(order => {
+    //     const orders = JSON.parse(localStorage.getItem("orders"));
+    //     const order_id = order[0].id;
+    //     localStorage.setItem("order_id", order_id);
+    //     return addItemsToOrder({
+    //           items: orders,
+    //           order_id: order_id
+    //     });
+    //   })
+    //   .then(ordersSubmitted => {
+    //     window.location.href = "/order";
+    //   })
+    //   .catch(err => {
+    //     console.log(err.message);
+    //   });
+
+
+
   });
 
   //Main outer function
