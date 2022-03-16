@@ -152,6 +152,7 @@ $(() => {
       .then(orders => {
         console.log('order deleted');
         localStorage.removeItem("order_id");
+        localStorage.removeItem("item_orders");
         window.location.href = "/";
       })
       .catch(err => {
@@ -200,6 +201,8 @@ $(() => {
 
     localStorage.removeItem("order_id");
     localStorage.removeItem("orders");
+    localStorage.removeItem("item_orders");
+
   }, estimatedTime * 1000);
 
 
