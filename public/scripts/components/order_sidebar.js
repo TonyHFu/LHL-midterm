@@ -167,6 +167,13 @@ $(() => {
   });
 
   function renderSidebar(orders) {
+
+    if (localStorage.getItem("order_id")) {
+      console.log("got here");
+      $("#submit-order").hide();
+      $("#confirm-changes").show();
+    }
+
     $(".order-sidebar-content").empty();
     let subtotal = 0;
     orders.forEach(order => {
