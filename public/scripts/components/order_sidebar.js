@@ -122,12 +122,24 @@ $(() => {
       return alert("Your order is empty!");
     }
 
+    let quantityError = false;
+    $(".quantity").each(function(i) {
+      if ($(this).val() < 1 || $(this).val() > 50) {
+        quantityError = true;
+        return alert("Check your order for errors!");
+      }
+    });
+
+    //Because you can't return from within .each method
+    if (quantityError) {
+      return;
+    }
+
     postOrder()
       .then(order => {
+        const orders = JSON.parse(localStorage.getItem("orders"));
         const order_id = order[0].id;
         localStorage.setItem("order_id", order_id);
-        orders = JSON.parse(localStorage.getItem("orders"));
-
         return addItemsToOrder({
               items: orders,
               order_id: order_id
@@ -140,7 +152,7 @@ $(() => {
         console.log(err.message);
       });
 
-  })
+  });
 
   function renderSidebar(orders) {
     $(".order-sidebar-content").empty();
