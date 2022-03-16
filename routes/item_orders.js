@@ -48,7 +48,7 @@ module.exports = (db) => {
     const item_order_id = req.params.id;
     let queryString = `
       DELETE FROM item_orders
-      WHERE id = $1
+      WHERE item_id = $1
       RETURNING *;
     `;
     const queryParams = [item_order_id];
@@ -57,9 +57,8 @@ module.exports = (db) => {
         res.json(item_orders.rows);
       })
       .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+        res.status(500);
+        console.log(err.message);
       });
   });
 

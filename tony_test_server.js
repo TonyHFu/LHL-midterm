@@ -9,8 +9,13 @@ const app = express();
 const morgan = require("morgan");
 const cookieSession = require('cookie-session');
 
+//Twilio
+const twilio = require('twilio');
 
-
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = new twilio(accountSid, authToken);
+module.exports = { client };
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
@@ -72,7 +77,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/order", (req, res) => {
-  res.render("tony_order");
+  res.render("order_page");
 });
 
 app.listen(PORT, () => {

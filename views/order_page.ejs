@@ -7,7 +7,8 @@
   <title>Order Page</title>
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-
+  <script type="text/javascript" src="/scripts/network.js"></script>
+  <script type="text/javascript" src="/scripts/components/order_page.js"></script>
   <style>
     .order-sidebar {
       position: fixed;
@@ -39,7 +40,12 @@
   <h1>Orders</h1>
   <p>Thanks for submitting your order!</p>
   <main class="orders"></main>
-  <script type="text/javascript" src="/scripts/components/order_page.js"></script>
+  <p>Subtotal: <p id="subtotal"></p></p>
+  <p>Tax: <p id="tax"></p></p>
+  <p>Total: <p id="total"></p></p>
+  <button class="cancel-order" type="submit">Cancel</button>
+
+
 
 </body>
 </html>

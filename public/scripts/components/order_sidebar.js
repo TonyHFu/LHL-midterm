@@ -23,7 +23,6 @@ $(() => {
           <figcaption>${title}</figcaption>
         </figure>
         <p>price $${price_cents / 100}</p>
-
         <div>
           <span class="minus">
               <button type="button">
@@ -39,8 +38,6 @@ $(() => {
         </div>
         <button class="remove-from-order" type="submit">Remove</button>
       </div>
-
-
     `
     );
 
@@ -143,6 +140,3 @@ $(() => {
 
   window.sideBar.renderSidebar = renderSidebar;
 });
-
-
-

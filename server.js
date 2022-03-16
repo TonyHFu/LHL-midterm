@@ -9,7 +9,12 @@ const app = express();
 const morgan = require("morgan");
 const cookieSession = require('cookie-session');
 
+//twilio
+const twilio = require('twilio');
 
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = new twilio(accountSid, authToken);
 
 // PG database client/connection setup
 const { Pool } = require("pg");
