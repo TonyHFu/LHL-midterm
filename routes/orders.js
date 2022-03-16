@@ -8,6 +8,8 @@
 const express = require('express');
 const router  = express.Router();
 const { client } = require('../server.js');
+const { sendText } = require('../send_sms');
+
 module.exports = (db) => {
 
   router.post("/", (req, res) => {
@@ -20,7 +22,9 @@ module.exports = (db) => {
       RETURNING *;
     `, [user_id])
       .then(order => {
+        sendText (`An order has been placed`);
         res.json(order.rows);
+        console.log("order", order);
       })
       .catch(err => {
         console.log(err.message)
@@ -44,7 +48,9 @@ module.exports = (db) => {
       RETURNING *;
     `, [order_id])
       .then((order) => {
+        sendText("Your order is ready for pickup!");
         res.json(order.rows);
+        console.log(order_id);
       })
       .catch(err => {
         res
@@ -65,13 +71,7 @@ module.exports = (db) => {
       RETURNING *;
     `, [order_id])
       .then((order) => {
-        client.messages
-          .create({
-            body: `The order ${order_id} has been cancelled`,
-            to: process.env.PHONE_NUM, // Cell phone number
-            from: process.env.TWILIO_NUM, // Twilio number
-          })
-          .then((message) => console.log(message.sid));
+        sendText (`The order ${order_id} has been cancelled`);
         res.json(order.rows);
       })
       .catch(err => {
