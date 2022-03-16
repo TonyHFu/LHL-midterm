@@ -121,11 +121,18 @@
     }
   }
 
-  // #clear-cart {
-  //   background-color: red;
-  // }
+  input[type='number'] {
+    -moz-appearance:textfield;
+  }
 
-  // #submit-order {
-  //   background-color: green;
-  // }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
+
+  .quantity-error {
+    color: red;
+    display: none;
+  }
 }

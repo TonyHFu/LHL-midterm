@@ -23,14 +23,14 @@ $(() => {
           <figcaption>${title}</figcaption>
         </figure>
         <p>cost $${price_cents * quantity / 100}</p>
-
+        <p class="quantity-error">Must be between 1 and 50</p>
         <div>
           <span class="minus">
               <button type="button">
                 <i class="fa-solid fa-minus"></i>
               </button>
           </span>
-          <input type="text" name="quant" class="quantity" value=${quantity} min="1" max="50">
+          <input type="number" name="quant" class="quantity" value=${quantity} min=1 max=50>
           <span class="plus">
               <button type="button">
                 <i class="fa-solid fa-plus"></i>
@@ -65,7 +65,9 @@ $(() => {
 
       for (let order of orders) {
         if (order.item_id === item_id) {
-          order.quantity ++;
+          if (order.quantity < 50) {
+            order.quantity ++;
+          }
         }
       }
 
@@ -74,7 +76,23 @@ $(() => {
       renderSidebar(orders);
     })
 
+    $(`#order-item${item_id} .quantity`).on("change", function(event) {
+      $(`#order-item${item_id} .quantity-error`).hide();
+      if ($(this).val() < 1 || $(this).val() > 50) {
+        return $(`#order-item${item_id} .quantity-error`).show();
+      }
+      const orders = JSON.parse(localStorage.getItem("orders"));
 
+      for (let order of orders) {
+        if (order.item_id === item_id) {
+          order.quantity = $(this).val();
+        }
+      }
+
+      localStorage.setItem("orders", JSON.stringify(orders));
+
+      renderSidebar(orders);
+    })
 
     $(`#order-item${item_id} .remove-from-order`).on("click", function(event) {
 
