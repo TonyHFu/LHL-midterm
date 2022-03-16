@@ -152,6 +152,7 @@ $(() => {
       .then(orders => {
         console.log('order deleted');
         localStorage.removeItem("order_id");
+        window.location.href = "/";
       })
       .catch(err => {
         console.log(err.message);

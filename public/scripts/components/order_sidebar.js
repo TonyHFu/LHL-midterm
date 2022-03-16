@@ -123,7 +123,8 @@ $(() => {
 
       renderSidebar(updatedOrders);
     });
-  }
+  };
+  //End of main inner function
 
   //Clear cart Event
   $("#clear-cart").on("click", event => {
@@ -171,6 +172,37 @@ $(() => {
         console.log(err.message);
       });
 
+  });
+
+  //Confirm-changes Event
+  $("#confirm-changes").on("click", function(event) {
+    const orderId = {
+      'order_id': JSON.parse(localStorage.getItem('order_id'))
+    };
+    console.log(orderId.order_id);
+
+    deleteOrder(orderId)
+      .then(orders => {
+        console.log('order deleted');
+        localStorage.removeItem("order_id");
+        return postOrder();
+      })
+      .then(order => {
+        const orders = JSON.parse(localStorage.getItem("orders"));
+        const order_id = order[0].id;
+        localStorage.setItem("order_id", order_id);
+        return addItemsToOrder({
+              items: orders,
+              order_id: order_id
+        });
+      })
+      .then(ordersSubmitted => {
+        window.location.href = "/order";
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+      //notification to owner (twilio)
   });
 
   //Main outer function
