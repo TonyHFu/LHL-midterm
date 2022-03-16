@@ -152,6 +152,7 @@ $(() => {
       .then(orders => {
         console.log('order deleted');
         localStorage.removeItem("order_id");
+        window.location.href = "/";
       })
       .catch(err => {
         console.log(err.message);
@@ -182,6 +183,13 @@ $(() => {
     clearInterval(displayEstimatedTime);
     $(".time-estimate").empty();
     $(".to-completion").text("Your order is complete!");
+    localStorage.removeItem("order_id");
+    localStorage.removeItem("orders");
+    $(".orders").empty();
+    $('body').find("p")[1].remove();
+    $('body').find("p").slice(2, 12).remove();
+    $('button').remove();
+
   }, estimatedTime * 1000);
 
 

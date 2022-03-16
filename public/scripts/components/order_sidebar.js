@@ -2,7 +2,7 @@ $(() => {
 
   window.sideBar = {};
 
-
+  //Main Inner Function
   function listingOrderSidebar(order_item) {
     const {
       item_id,
@@ -46,6 +46,7 @@ $(() => {
     `
     );
 
+    //Minus Event
     $(`#order-item${item_id} .minus`).on("click", function(event) {
       const orders = JSON.parse(localStorage.getItem("orders"));
 
@@ -62,6 +63,7 @@ $(() => {
       renderSidebar(orders);
     })
 
+    //Plus Event
     $(`#order-item${item_id} .plus`).on("click", function(event) {
       const orders = JSON.parse(localStorage.getItem("orders"));
 
@@ -78,6 +80,7 @@ $(() => {
       renderSidebar(orders);
     })
 
+    //Quantity change Event
     $(`#order-item${item_id} .quantity`).on("change", function(event) {
       const orders = JSON.parse(localStorage.getItem("orders"));
 
@@ -102,10 +105,12 @@ $(() => {
       renderSidebar(orders);
     });
 
+    //Remove-error Event
     $(`#order-item${item_id} .remove-error`).on("click", function(event) {
       $(`#order-item${item_id} .quantity-error`).hide();
     });
 
+    //Remove from order Event
     $(`#order-item${item_id} .remove-from-order`).on("click", function(event) {
 
       const orders = JSON.parse(localStorage.getItem("orders"));
@@ -118,8 +123,10 @@ $(() => {
 
       renderSidebar(updatedOrders);
     });
-  }
+  };
+  //End of main inner function
 
+  //Clear cart Event
   $("#clear-cart").on("click", event => {
     localStorage.removeItem("orders");
     $(".order-sidebar-content").empty();
@@ -129,6 +136,7 @@ $(() => {
     $("#checkout-button").removeClass("cart-ready");
   })
 
+  //Submit order Event
   $("#submit-order").on("click", function(event) {
     if (!localStorage.getItem("orders") || JSON.parse(localStorage.getItem("orders")).length === 0) {
       return alert("Your order is empty!");
@@ -166,6 +174,38 @@ $(() => {
 
   });
 
+  //Confirm-changes Event
+  $("#confirm-changes").on("click", function(event) {
+    const orderId = {
+      'order_id': JSON.parse(localStorage.getItem('order_id'))
+    };
+    console.log(orderId.order_id);
+
+    deleteOrder(orderId)
+      .then(orders => {
+        console.log('order deleted');
+        localStorage.removeItem("order_id");
+        return postOrder();
+      })
+      .then(order => {
+        const orders = JSON.parse(localStorage.getItem("orders"));
+        const order_id = order[0].id;
+        localStorage.setItem("order_id", order_id);
+        return addItemsToOrder({
+              items: orders,
+              order_id: order_id
+        });
+      })
+      .then(ordersSubmitted => {
+        window.location.href = "/order";
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+      //notification to owner (twilio)
+  });
+
+  //Main outer function
   function renderSidebar(orders) {
 
     if (localStorage.getItem("order_id")) {
