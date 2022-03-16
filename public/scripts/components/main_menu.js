@@ -1,10 +1,17 @@
 $(() => {
+  $(".order-sidebar").hide();
+
   if (localStorage.getItem("orders")) {
+    if (localStorage.getItem("orders") !== "[]") {
+      $(".order-sidebar").show();
+    }
     sideBar.renderSidebar(JSON.parse(localStorage.getItem("orders")));
+
   }
 
 
-  function listSingleItem(menu_item) {
+
+  function listSingleItem(menu_item, item_type) {
     const {
       id,
       title,
@@ -16,20 +23,22 @@ $(() => {
       type
     } = menu_item;
 
+    $(`#${item_type}-items`).append(`
 
-    $("main").append(`
       <div class="menu-item" id="item-${id}">
-        <figure>
-          <img src=${photo}>
-          <figcaption>${title}</figcaption>
-        </figure>
-        <p>price $${price_cents / 100}</p>
-        <button class="add-to-order" type="submit">Add</button>
-      </div>
+          <p class='item-name'>${title}</p>
+          <figure>
+            <img class = "item-photo" src=${photo}>
+            <figcaption>${description}</figcaption>
+          </figure>
+          <div class="item-footer">
+            <p class='price'>$${price_cents / 100}</p>
+            <button class="add-to-order" type="submit">Add</button>
+          </div>
+        </div>
     `
     );
 
-    //To integrate, will need to modify jquery selector probably
     $(`#item-${id} .add-to-order`).on("click", function(event) {
       if (!localStorage.getItem("orders")) {
         localStorage.setItem("orders", "[]");
@@ -58,13 +67,22 @@ $(() => {
       localStorage.setItem("orders", JSON.stringify(orders));
 
       sideBar.renderSidebar(orders);
+      $(".order-sidebar").show();
+
     });
   }
+
+  $("#checkout-button").on("click", function(event) {
+    $(".order-sidebar").show();
+  });
+
+
+
 
   getAllMenuItems()
     .then(result => {
       result.forEach(item => {
-        listSingleItem(item);
+        listSingleItem(item, item.type);
       })
     })
     .catch(err => {

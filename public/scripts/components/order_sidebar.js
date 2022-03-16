@@ -22,21 +22,26 @@ $(() => {
           <img src=${photo}>
           <figcaption>${title}</figcaption>
         </figure>
-        <p>price $${price_cents / 100}</p>
+        <p>cost $${price_cents * quantity / 100}</p>
+        <p class="quantity-error">
+          Must be between 1 and 50
+          <i class="fa-solid fa-square-xmark remove-error"></i>
+        </p>
+
         <div>
           <span class="minus">
               <button type="button">
                 <i class="fa-solid fa-minus"></i>
               </button>
           </span>
-          <input type="text" name="quant" id="quantity" value=${quantity} min="1">
+          <input type="number" name="quant" class="quantity" value=${quantity} min=1 max=50>
           <span class="plus">
               <button type="button">
                 <i class="fa-solid fa-plus"></i>
               </button>
           </span>
+          <button class="remove-from-order" type="submit">Remove</button>
         </div>
-        <button class="remove-from-order" type="submit">Remove</button>
       </div>
     `
     );
@@ -62,7 +67,9 @@ $(() => {
 
       for (let order of orders) {
         if (order.item_id === item_id) {
-          order.quantity ++;
+          if (order.quantity < 50) {
+            order.quantity ++;
+          }
         }
       }
 
@@ -71,7 +78,33 @@ $(() => {
       renderSidebar(orders);
     })
 
+    $(`#order-item${item_id} .quantity`).on("change", function(event) {
+      const orders = JSON.parse(localStorage.getItem("orders"));
 
+      $(`#order-item${item_id} .quantity-error`).hide();
+      if ($(this).val() < 1 || $(this).val() > 50) {
+        for (let order of orders) {
+          if (order.item_id === item_id) {
+            $(this).val(order.quantity);
+          }
+        }
+        return $(`#order-item${item_id} .quantity-error`).show();
+      }
+
+      for (let order of orders) {
+        if (order.item_id === item_id) {
+          order.quantity = $(this).val();
+        }
+      }
+
+      localStorage.setItem("orders", JSON.stringify(orders));
+
+      renderSidebar(orders);
+    });
+
+    $(`#order-item${item_id} .remove-error`).on("click", function(event) {
+      $(`#order-item${item_id} .quantity-error`).hide();
+    });
 
     $(`#order-item${item_id} .remove-from-order`).on("click", function(event) {
 
@@ -93,6 +126,7 @@ $(() => {
     $("#subtotal").text("$0");
     $("#tax").text("$0");
     $("#total").text("$0");
+    $("#checkout-button").removeClass("cart-ready");
   })
 
   $("#submit-order").on("click", function(event) {
@@ -100,12 +134,24 @@ $(() => {
       return alert("Your order is empty!");
     }
 
+    let quantityError = false;
+    $(".quantity").each(function(i) {
+      if ($(this).val() < 1 || $(this).val() > 50) {
+        quantityError = true;
+        return alert("Check your order for errors!");
+      }
+    });
+
+    //Because you can't return from within .each method
+    if (quantityError) {
+      return;
+    }
+
     postOrder()
       .then(order => {
+        const orders = JSON.parse(localStorage.getItem("orders"));
         const order_id = order[0].id;
         localStorage.setItem("order_id", order_id);
-        orders = JSON.parse(localStorage.getItem("orders"));
-
         return addItemsToOrder({
               items: orders,
               order_id: order_id
@@ -118,7 +164,7 @@ $(() => {
         console.log(err.message);
       });
 
-  })
+  });
 
   function renderSidebar(orders) {
     $(".order-sidebar-content").empty();
@@ -132,9 +178,16 @@ $(() => {
     $("#tax").text("$" + (tax / 100).toFixed(2));
     const total = subtotal + tax;
     $("#total").text("$" + (total / 100).toFixed(2));
-
+    if (orders.length > 0) {
+      return $("#checkout-button").addClass("cart-ready");
+    }
+    $("#checkout-button").removeClass("cart-ready");
   };
 
+
+  $("#hide-sidebar").on("click", function(event) {
+    $(".order-sidebar").hide();
+  });
 
 
 

@@ -9,7 +9,7 @@ nav {
   z-index: 10;
   top: 0;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding-left: 1em;
   padding-right: 1em;
@@ -21,10 +21,16 @@ nav {
     margin-left: 1em;
   }
 
+  #logo-img {
+    font-size: 40px;
+    padding-bottom: 20px;
+    padding-right: 10px;
+  }
+
   #menu-nav{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     width: 60%;
     align-self: flex-end;
     align-items: flex-end;
@@ -32,6 +38,8 @@ nav {
     font-family: 'Sansita Swashed', sans-serif;
     font-weight: bold;
     font-size: 30px;
+    padding-left: 0.5em;
+    padding-right: 2em;
   }
 
   #sign-in {
@@ -42,5 +50,35 @@ nav {
 
   .item:hover {
     color: #000000;
+  }
+
+  #checkout-button {
+    // position: fixed;
+    // right: 40px;
+    // bottom: 20px;
+    // border-radius: 100%;
+    background-color: #dddddd;
+    outline: none;
+    width: 5em;
+    height: 5em;
+    size: 20px;
+    border: none;
+  }
+
+  a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .cart-ready {
+    color: red;
+  }
+
+  .right-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 300px;
   }
 }

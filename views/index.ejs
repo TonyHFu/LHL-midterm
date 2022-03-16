@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
   <link rel="stylesheet" href="/styles/footer.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/sidebar.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
@@ -28,51 +29,76 @@
 <body>
   <!-- Top nav bar (fixed???) -->
   <nav>
+    <a href="/">
     <div id="logo">
-      <i id = "logo-img" class="fa-solid fa-burger-cheese"></i>
-      <h2>BURGER PLACE</h2>
-    </div>
+        <i id = "logo-img" class="fa-solid fa-burger"></i>
+        <h2>BURGER PLACE</h2>
+      </div>
+    </a>
     <div id="menu-nav">
-      <p class="item">Entrees</p>
-      <p class="item">Sides</p>
-      <p class="item">Drinks</p>
-      <p class="item">Desserts</p>
+      <a href="#menu-entrees">
+        <p class="item">Entrees</p>
+      </a>
+      <a href="#menu-sides">
+        <p class="item">Sides</p>
+      </a>
+      <a href="#menu-desserts">
+        <p class="item">Desserts</p>
+      </a>
+      <a href="#menu-drinks">
+        <p class="item">Drinks</p>
+      </a>
     </div>
-    <p id = "sign-in">SIGN IN<p>
+    <div class="right-nav">
+      <button id="checkout-button" type="submit"><i class="fa-solid fa-cart-shopping fa-2x"></i></button>
+      <p id = "sign-in">SIGN IN<p>
+    </div>
+
   </nav>
 
   <!-- Page-specific (main) content here -->
   <main>
+    <section class="order-sidebar">
+      <header>
+        <i class="fa-solid fa-angles-right" id="hide-sidebar"></i>
+        <h2>Orders</h2>
+      </header>
+      <section class="order-sidebar-content">
+
+      </section>
+      <footer class="sidebar-footer">
+        <div class="cost">
+          <span>Subtotal: </span>
+          <span id="subtotal"></span>
+        </div>
+        <div class="cost">Tax: <span id="tax"></span></div>
+        <div class="cost total">Total: <span id="total"></span></div>
+        <div class="cart-order">
+          <button id="clear-cart">Clear Cart</button>
+          <button id="submit-order">Order</button>
+        </div>
+      </footer>
+    </section>
 
     <section class="menu">
-      <p class ="menu-title">Entrees</p>
-      <div class="title-items">
-        <div class="menu-item">
-          <p class = 'item-name'>Scorpion Gourmet Burger</p>
-          <figure>
-            <img class = "item-photo" src="https://images.ctfassets.net/oewsurrg31ok/1iXVHMMD4A2jWpc3jJ41DA/f4227523f43fb8cf562063e395bed9dd/Q3_Scorpion_Gourmet_Burger_21.png?w=1200&h=900&q=50&fm=webp">
-            <figcaption>Fire-grilled beef burger topped with Scorpion Pepper Sauce, Pepper-Jack, fried jalapeno coins, lettuce, tomatoes, pickles, red onions and jalapenos roasted in Scorpion sauce and roasted garlic aioli on a sesame seed bun</figcaption>
-          </figure>
-          <div class = "item-footer">
-            <p class = 'price'>$<%= 1779 /100%></p>
-            <button class="add-to-order" type="submit">Add</button>
-          </div>
-        </div>
+      <p class="menu-title" id ="menu-entrees">Entrees</p>
+      <div id="entree-items" class="title-items">
 
-        <div class="menu-item">
-          <p class = 'item-name'>Scorpion Gourmet Burger</p>
-          <figure>
-            <img class = "item-photo" src="https://images.ctfassets.net/oewsurrg31ok/1iXVHMMD4A2jWpc3jJ41DA/f4227523f43fb8cf562063e395bed9dd/Q3_Scorpion_Gourmet_Burger_21.png?w=1200&h=900&q=50&fm=webp">
-            <figcaption>Fire-grilled beef burger topped with Scorpion Pepper Sauce, Pepper-Jack, fried jalapeno coins, lettuce, tomatoes, pickles, red onions and jalapenos roasted in Scorpion sauce and roasted garlic aioli on a sesame seed bun</figcaption>
-          </figure>
-          <div class = "item-footer">
-            <p class = 'price'>$<%= 1779 /100%></p>
-            <button class="add-to-order" type="submit">Add</button>
-          </div>
-        </div>
+      </div>
+      <p class="menu-title" id ="menu-sides">Sides</p>
+      <div id="side-items" class="title-items">
+
+      </div>
+      <p class="menu-title" id ="menu-desserts">Desserts</p>
+      <div id="dessert-items" class="title-items">
+
+      </div>
+      <p class="menu-title" id ="menu-drinks">Drinks</p>
+      <div id="drink-items" class="title-items">
+
+      </div>
 
     </section>
-    <button id="checkout-button" type="submit"><i class="fa-solid fa-cart-shopping fa-2x"></i></button>
 
   </main>
 
@@ -96,6 +122,9 @@
   </footer>
   <!-- Bootstrap JS and Popper link -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="/scripts/network.js"></script>
+  <script type="text/javascript" src="/scripts/components/order_sidebar.js"></script>
+  <script type="text/javascript" src="/scripts/components/main_menu.js"></script>
 </body>
 
 </html>

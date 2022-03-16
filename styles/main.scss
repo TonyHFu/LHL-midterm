@@ -6,7 +6,8 @@ main {
   align-self: flex-start;
   background-color: #ffffff;
   color: #4d4d4d;
-  padding-top: 2em;
+  padding-top: 0.5em;
+  padding-left: 2em;
   // justify-content: center;
 
   #checkout-button {
@@ -21,6 +22,23 @@ main {
     size: 20px;
   }
 
+  #menu-entrees {
+    padding-top: 150px;
+    margin-top: -150px;
+  }
+  #menu-sides {
+    padding-top: 150px;
+    margin-top: -150px;
+  }
+  #menu-drinks {
+    padding-top: 150px;
+    margin-top: -150px;
+  }
+  #menu-desserts {
+    padding-top: 150px;
+    margin-top: -150px;
+  }
+
   .menu {
     font-family: 'Arima Madurai', sans-serif;
     display: flex;
@@ -30,7 +48,7 @@ main {
 
     .menu-title {
       font-weight: 500;
-      font-size: 75px;
+      font-size: 40px;
     }
     .title-items {
       display: flex;
