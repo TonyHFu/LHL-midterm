@@ -186,10 +186,10 @@ $(() => {
 
   //Confirm-changes Event
   $("#confirm-changes").on("click", function(event) {
-    const orderId = {
-      'order_id': JSON.parse(localStorage.getItem('order_id'))
-    };
-    console.log(orderId.order_id);
+    // const orderId = {
+    //   'order_id': JSON.parse(localStorage.getItem('order_id'))
+    // };
+    // console.log(orderId.order_id);
 
     // deleteOrder(orderId)
     //   .then(orders => {
@@ -226,20 +226,34 @@ $(() => {
       itemsObj[item.item_id] = item;
     }
 
+    const newItemOrders = [];
     for (let cartItem in cartObj) {
       if (cartItem in itemsObj) {
-        return putItemOrder({
+        putItemOrder({
           item_order_id: itemsObj[cartItem].item_order_id,
           quantity: cartObj[cartItem].quantity
-        })
+        });
+      } else {
+        newItemOrders.push(cartObj[cartItem]);
       }
-
     }
 
+    addItemsToOrder({
+      items: newItemOrders,
+      order_id: localStorage.getItem("order_id")
+    });
 
+    for (let orderItem in itemsObj) {
+      if (!(orderItem in cartObj)) {
+        deleteItemFromOrder({ item_order_id: itemsObj[orderItem].item_order_id });
+      }
+    }
 
-    console.log(cartObj);
-    console.log(itemsObj);
+    orderEditNotification({ order_id: localStorage.getItem("order_id") });
+
+    localStorage.setItem("item_orders", localStorage.getItem("orders"));
+
+    window.location.href = "/order";
 
   });
 

@@ -63,3 +63,9 @@ function putItemOrder(data) {
   });
 };
 
+function orderEditNotification(data) {
+  return $.ajax({
+    url: "/api/notify/" + data.order_id
+  });
+};
+
