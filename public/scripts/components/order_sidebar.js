@@ -166,6 +166,16 @@ $(() => {
         });
       })
       .then(ordersSubmitted => {
+        const item_orders = [];
+        ordersSubmitted.forEach(submittedOrder => {
+          item_orders.push({
+            item_order_id: submittedOrder.id,
+            item_id: submittedOrder.item_id,
+            quantity: submittedOrder.quantity
+          });
+        });
+
+        localStorage.setItem("item_orders", JSON.stringify(item_orders));
         window.location.href = "/order";
       })
       .catch(err => {
@@ -203,7 +213,33 @@ $(() => {
     //     console.log(err.message);
     //   });
 
+    const cart = JSON.parse(localStorage.getItem("orders"));
+    const item_orders = JSON.parse(localStorage.getItem("item_orders"));
 
+    const cartObj = {};
+    for (let order of cart) {
+      cartObj[order.item_id] = order;
+    }
+
+    const itemsObj = {};
+    for (let item of item_orders){
+      itemsObj[item.item_id] = item;
+    }
+
+    for (let cartItem in cartObj) {
+      if (cartItem in itemsObj) {
+        return putItemOrder({
+          item_order_id: itemsObj[cartItem].item_order_id,
+          quantity: cartObj[cartItem].quantity
+        })
+      }
+
+    }
+
+
+
+    console.log(cartObj);
+    console.log(itemsObj);
 
   });
 
