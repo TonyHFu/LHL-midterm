@@ -12,6 +12,22 @@ const { sendText } = require('../send_sms');
 
 module.exports = (db) => {
 
+  router.get("/", (req, res) => {
+    db.query(`
+      SELECT * FROM orders
+      WHERE is_complete = false;
+    `)
+      .then(orders => {
+        res.json(orders.rows);
+      })
+      .catch(err => {
+        console.log(err.message)
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
   router.post("/", (req, res) => {
     const user_id = req.session.user_id;
 

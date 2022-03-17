@@ -83,6 +83,11 @@ app.get("/order", (req, res) => {
   res.render("order_page");
 });
 
+app.get("/owner", (req, res) => {
+  res.render("owner");
+});
+
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });

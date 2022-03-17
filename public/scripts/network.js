@@ -69,3 +69,14 @@ function orderEditNotification(data) {
   });
 };
 
+function getItemsForOrder(data) {
+  return $.ajax({
+    url: "api/item_orders/" + data.order_id
+  });
+};
+
+function getAllOrders() {
+  return $.ajax({
+    url: "api/orders"
+  });
+};

@@ -1,0 +1,46 @@
+#owner-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+// #order-footer {
+//   display: flex;
+//   background-color: #dddddd;
+//   color: #4d4d4d;
+//   width: 100%;
+//   justify-content: space-between;
+//   align-items: center;
+//   font-size: 20px;
+//   font-family: 'Sansita Swashed', sans-serif;
+//   height: 100px;
+//   position: absolute;
+//   bottom: 0;
+//   .footer-copyright {
+//     width: 10%;
+//     font-size: 18px;
+//   }
+
+//   .socials-links {
+//     display: flex;
+//     justify-content: space-between;
+//     padding-left: 1em;
+//     width: 10%;
+//   }
+// }
+
+.order-main {
+  height: 100%;
+  padding-top: 150px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.customer-orders {
+  border: black 1px solid;
+}
+
+.order-item {
+  border-top: gray 1px solid;
+}
