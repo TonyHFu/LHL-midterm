@@ -173,7 +173,7 @@ $(() => {
 
   renderOrders(orders);
 
-  let estimatedTime = 10;
+  let estimatedTime = 5;
 
   const displayEstimatedTime = setInterval(function() {
     estimatedTime -= 1;
@@ -183,15 +183,12 @@ $(() => {
 
   setTimeout(function() {
     clearInterval(displayEstimatedTime);
-    $(".time-estimate").empty();
-    $(".to-completion").text("Your order is complete!");
-
+    $(".text").empty();
+    $("p").empty();
     $(".orders").empty();
-    $('body').find("p")[1].remove();
-    $('body').find("p").slice(2, 12).remove();
     $('button').remove();
-
     const order_id = localStorage.getItem("order_id");
+    $(".text").append(`<p>Your order (# ${order_id}) is ready for pickup!`);
 
     putOrder({
       order_id: order_id,

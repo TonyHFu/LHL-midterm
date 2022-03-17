@@ -100,9 +100,13 @@ body {
     bottom: 0;
     .footer-copyright {
       width: 10%;
+      font-size: 18px;
     }
 
     .socials-links {
+      display: flex;
+      justify-content: space-between;
+      padding-left: 1em;
       width: 10%;
     }
   }

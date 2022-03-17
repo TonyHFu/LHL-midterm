@@ -15,16 +15,15 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     const user_id = req.session.user_id;
 
-    // res.send(`posted order for user ${user_id}`);
     db.query(`
       INSERT INTO orders (customer_id, is_complete)
       VALUES($1, false)
       RETURNING *;
     `, [user_id])
       .then(order => {
-        sendText (`An order has been placed`);
+        const order_id = order.rows[0].id;
+        sendText (`An order (id: ${order_id}) has been placed`);
         res.json(order.rows);
-        console.log("order", order);
       })
       .catch(err => {
         console.log(err.message)
@@ -39,7 +38,6 @@ module.exports = (db) => {
     const user_id = req.session.user_id;
     const order_id = req.params.id;
 
-    // res.send(`completed order for user ${user_id} for order ${order_id}`);
 
     db.query(`
       UPDATE orders
@@ -64,7 +62,6 @@ module.exports = (db) => {
     const user_id = req.session.user_id;
     const order_id = req.params.id;
 
-    // res.send(`deleted order for user ${user_id} for order ${order_id}`);
     db.query(`
       DELETE FROM orders
       WHERE id = $1

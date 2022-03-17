@@ -3,7 +3,7 @@
   width: 20%;
   overflow-y: scroll;
   right: 0;
-  top: 150px;
+  top: 0;
   bottom: 0;
   background-color: white;
   z-index: 99;
@@ -15,7 +15,7 @@
 
   header {
     position: fixed;
-    top: 150px;
+    top: 0;
     width: 100%;
 
     display: flex;
@@ -119,6 +119,10 @@
       background-color: white;
       border-radius: 5px;
       color: #4d4d4d;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      padding-left: 5px;
+      padding-right: 5px;
     }
   }
 
