@@ -184,7 +184,7 @@ $(() => {
   setTimeout(function() {
     clearInterval(displayEstimatedTime);
     $(".text").empty();
-    $("p").empty();
+    $("main p").empty();
     $(".orders").empty();
     $('button').remove();
     const order_id = localStorage.getItem("order_id");
