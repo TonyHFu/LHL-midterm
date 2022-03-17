@@ -1,20 +1,21 @@
 .order-sidebar {
   position: fixed;
-  width: 300px;
+  width: 20%;
   overflow-y: scroll;
   right: 0;
-  top: 0;
+  top: 150px;
   bottom: 0;
   background-color: white;
   z-index: 99;
   color: #4d4d4d;
   font-family: 'Arima Madurai', sans-serif;
+  border-left: 2px solid #4d4d4d;
 
 
 
   header {
     position: fixed;
-    top: 0;
+    top: 150px;
     width: 100%;
 
     display: flex;

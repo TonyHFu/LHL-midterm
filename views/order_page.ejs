@@ -18,52 +18,60 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="/styles/order_page.css" type="text/css" />
-
+  <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
 
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/network.js"></script>
   <script type="text/javascript" src="/scripts/components/order_page.js"></script>
-  <style>
-    .order-sidebar {
-      position: fixed;
-      width: 300px;
-      overflow-y: scroll;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      background-color: chocolate;
-    }
-    .order-sidebar h2 {
-      background-color: brown;
-    }
-    img {
-      width: 100px;
-      height: auto;
-    }
-    .menu-item {
-      background-color: red;
-      border: 5px blue solid;
-    }
-    .sidebar-footer {
-      height: auto;
-    }
-  </style>
+
 </head>
 <body>
-
-  <h1>Orders</h1>
-  <p>Thanks for submitting your order!</p>
-  <p>Your order is on the way!</p>
-  <p class="to-completion">Estimated time of completion is: <span class="time-estimate">9999</span> minutes</p>
-  <main class="orders"></main>
-  <p>Subtotal: <p id="subtotal"></p></p>
-  <p>Tax: <p id="tax"></p></p>
-  <p>Total: <p id="total"></p></p>
-
-  <button class="cancel-order" type="submit">Cancel</button>
-  <button class="edit-order" type="submit">Edit Order</button>
-
+  <nav id = "order-nav">
+    <a href="/">
+    <div id="logo">
+        <i id = "logo-img" class="fa-solid fa-burger"></i>
+        <h2>BURGER PLACE</h2>
+      </div>
+    </a>
+    <h1>Orders</h1>
+    <div class="right-nav">
+      <p id = "sign-in">SIGN IN<p>
+    </div>
+  </nav>
+  <main class = "order-main">
+    <div class= "text">
+      <p>Thanks for submitting your order!</p>
+      <p>Your order is on the way!</p>
+      <p class="to-completion">Estimated time of completion is: <span class="time-estimate">9999</span> minutes</p>
+    </div>
+    <main class="orders"></main>
+    <div class = "subtotal">
+      <p>Subtotal: </p>
+      <p id="subtotal"></p>
+    </div>
+    <div class = "tax">
+      <p>Tax: </p><p id="tax"></p>
+    </div>
+      <div class = "total">
+        <p>Total: </p>
+        <p id="total"></p>
+      </div>
+      <footer id="order-footer">
+        <div class="socials-links">
+          <i class="fa-brands fa-twitter"></i>
+          <i class="fa-brands fa-facebook"></i>
+          <i class="fa-brands fa-instagram"></i>
+        </div>
+        <div class = buttons>
+          <button class="cancel-order" type="submit">Cancel</button>
+          <button class="edit-order" type="submit">Edit Order</button>
+        </div>
+        <div class="footer-copyright">
+          <small>©2022 Burger Place International All Rights Reserved</small>
+        </div>
+      </footer>
+  </main>
 
 
 </body>
