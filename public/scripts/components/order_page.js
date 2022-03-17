@@ -173,7 +173,7 @@ $(() => {
 
   renderOrders(orders);
 
-  let estimatedTime = 50;
+  let estimatedTime = 40;
 
   const displayEstimatedTime = setInterval(function() {
     estimatedTime -= 1;
