@@ -4,13 +4,14 @@ $(() => {
   function renderOrders(orders) {
     $(".orders").empty();
     $(".orders").append(`
-      <p>Order ID: ${localStorage.getItem("order_id")}</p>
+      <p id = "order-id">Order ID: ${localStorage.getItem("order_id")}</p>
     `);
     let subtotal = 0;
     orders.forEach(order => {
       listingOrder(order);
       subtotal += order.price_cents * order.quantity;
-    });
+    })
+
     $("#subtotal").text("$" + subtotal / 100);
     const tax = Math.round(subtotal * 0.05);
     $("#tax").text("$" + (tax / 100).toFixed(2));
@@ -33,9 +34,9 @@ $(() => {
           <img src=${photo}>
           <figcaption>${title}</figcaption>
         </figure>
-        <p class="order-price">price $${price_cents / 100}</p>
-        <p class="order-quantity">quantity ${quantity}</p>
-        <p class="order-cost">cost $${price_cents * quantity / 100}</p>
+        <p class="order-price">price: $${price_cents / 100}</p>
+        <p class="order-quantity">quantity: ${quantity}</p>
+        <p class="order-cost">cost: $${price_cents * quantity / 100}</p>
       </div>
     `
 
