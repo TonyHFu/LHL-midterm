@@ -48,7 +48,7 @@ module.exports = (db) => {
     const item_order_id = req.params.id;
     let queryString = `
       DELETE FROM item_orders
-      WHERE item_id = $1
+      WHERE id = $1
       RETURNING *;
     `;
     const queryParams = [item_order_id];

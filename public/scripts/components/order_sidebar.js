@@ -166,6 +166,16 @@ $(() => {
         });
       })
       .then(ordersSubmitted => {
+        const item_orders = [];
+        ordersSubmitted.forEach(submittedOrder => {
+          item_orders.push({
+            item_order_id: submittedOrder.id,
+            item_id: submittedOrder.item_id,
+            quantity: submittedOrder.quantity
+          });
+        });
+
+        localStorage.setItem("item_orders", JSON.stringify(item_orders));
         window.location.href = "/order";
       })
       .catch(err => {
@@ -176,33 +186,66 @@ $(() => {
 
   //Confirm-changes Event
   $("#confirm-changes").on("click", function(event) {
-    const orderId = {
-      'order_id': JSON.parse(localStorage.getItem('order_id'))
-    };
-    console.log(orderId.order_id);
-
-    deleteOrder(orderId)
-      .then(orders => {
-        console.log('order deleted');
-        localStorage.removeItem("order_id");
-        return postOrder();
-      })
-      .then(order => {
-        const orders = JSON.parse(localStorage.getItem("orders"));
-        const order_id = order[0].id;
-        localStorage.setItem("order_id", order_id);
-        return addItemsToOrder({
-              items: orders,
-              order_id: order_id
+    if (!localStorage.getItem("orders")) {
+      const orderId = {
+        'order_id': JSON.parse(localStorage.getItem('order_id'))
+      };
+      return deleteOrder(orderId)
+        .then(orders => {
+          console.log('order deleted');
+          localStorage.removeItem("order_id");
+          localStorage.removeItem("item_orders");
+          window.location.href = "/";
+        })
+        .catch(err => {
+          console.log(err.message);
         });
-      })
-      .then(ordersSubmitted => {
-        window.location.href = "/order";
-      })
-      .catch(err => {
-        console.log(err.message);
-      });
       //notification to owner (twilio)
+    }
+
+    const cart = JSON.parse(localStorage.getItem("orders"));
+
+    const item_orders = JSON.parse(localStorage.getItem("item_orders"));
+
+    const cartObj = {};
+    for (let order of cart) {
+      cartObj[order.item_id] = order;
+    }
+
+    const itemsObj = {};
+    for (let item of item_orders){
+      itemsObj[item.item_id] = item;
+    }
+
+    const newItemOrders = [];
+    for (let cartItem in cartObj) {
+      if (cartItem in itemsObj) {
+        putItemOrder({
+          item_order_id: itemsObj[cartItem].item_order_id,
+          quantity: cartObj[cartItem].quantity
+        });
+      } else {
+        newItemOrders.push(cartObj[cartItem]);
+      }
+    }
+
+    addItemsToOrder({
+      items: newItemOrders,
+      order_id: localStorage.getItem("order_id")
+    });
+
+    for (let orderItem in itemsObj) {
+      if (!(orderItem in cartObj)) {
+        deleteItemFromOrder({ item_order_id: itemsObj[orderItem].item_order_id });
+      }
+    }
+
+    orderEditNotification({ order_id: localStorage.getItem("order_id") });
+
+    localStorage.setItem("item_orders", localStorage.getItem("orders"));
+
+    window.location.href = "/order";
+
   });
 
   //Main outer function
@@ -230,7 +273,7 @@ $(() => {
     $("#checkout-button").removeClass("cart-ready");
   };
 
-
+  //Hide-sidebar event
   $("#hide-sidebar").on("click", function(event) {
     $(".order-sidebar").hide();
   });
