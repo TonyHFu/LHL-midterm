@@ -28,11 +28,13 @@ $(() => {
   const listCustomerOrder = (orderItem) => {
     const menu = JSON.parse(localStorage.getItem("menu"));
     const title = menu[orderItem.item_id].title;
+    const photo = menu[orderItem.item_id].photo;
     console.log(`#order-${orderItem.order_id}`);
     $(`#order-${orderItem.order_id}`).append(`
       <article class="order-item">
         <p>Item id: ${orderItem.item_id}</p>
         <p>Title: ${title}</p>
+        <img src=${photo}>
         <p>quantity: ${orderItem.quantity}</p>
 
       </article>
