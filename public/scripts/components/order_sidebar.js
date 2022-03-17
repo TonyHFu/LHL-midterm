@@ -229,10 +229,12 @@ $(() => {
       }
     }
 
-    addItemsToOrder({
-      items: newItemOrders,
-      order_id: localStorage.getItem("order_id")
-    });
+    if (newItemOrders.length > 0) {
+      addItemsToOrder({
+        items: newItemOrders,
+        order_id: localStorage.getItem("order_id")
+      });
+    }
 
     for (let orderItem in itemsObj) {
       if (!(orderItem in cartObj)) {
