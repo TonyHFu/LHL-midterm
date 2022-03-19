@@ -71,20 +71,26 @@ function orderEditNotification(data) {
 
 function getItemsForOrder(data) {
   return $.ajax({
-    url: "api/item_orders/" + data.order_id
+    url: "/api/item_orders/" + data.order_id
   });
 };
 
 function getAllOrders() {
   return $.ajax({
-    url: "api/orders"
+    url: "/api/orders"
   });
 };
 
 function updateTime(orderId, newTime) {
   return $.ajax({
     method: "POST",
-    url: "update_time/" + orderId,
+    url: "/api/time/" + orderId,
     data: { newTime }
   })
 }
+
+function getTime(orderId) {
+  return $.ajax({
+    url: "/api/time/" + orderId
+  });
+};

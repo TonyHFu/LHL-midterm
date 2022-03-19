@@ -180,6 +180,12 @@ $(() => {
           });
         });
         localStorage.setItem("item_orders", JSON.stringify(item_orders));
+
+        const estimated_prep_time = localStorage.getItem("estimated_prep_time");
+        const order_id = localStorage.getItem("order_id");
+        return updateTime(order_id, estimated_prep_time);
+      })
+      .then(updatedTime => {
         window.location.href = "/order/" + localStorage.getItem("order_id");
       })
       .catch(err => {

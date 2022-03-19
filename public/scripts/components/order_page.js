@@ -78,35 +78,56 @@ $(() => {
 
   renderOrders(orders);
 
-  let estimatedTime = Number($(".time-estimate").text());
+
+
 
   const displayEstimatedTime = setInterval(function() {
+    if ($(".time-estimate").text() == 0 || $(".time-estimate").text() === "Waiting for restaurant confirmation") {
+      return $(".time-estimate").text("Waiting for restaurant confirmation");
+    }
+    let estimatedTime = Number($(".time-estimate").text());
     estimatedTime -= 1;
     $(".time-estimate").text(estimatedTime);
 
   }, 1000);
 
-  setTimeout(function() {
-    clearInterval(displayEstimatedTime);
-    $(".text").empty();
-    $("main p").empty();
-    $(".orders").empty();
-    $('button').remove();
+  const contactServer = setInterval(function() {
     const order_id = localStorage.getItem("order_id");
-    $(".text").append(`<p>Your order (# ${order_id}) is ready for pickup!`);
+    getTime(order_id)
+      .then(newTime => {
+        if (newTime.updateId) {
+          $(".time-estimate").text(newTime.orderTime);
+        }
+      })
+      .catch(err => {
+        console.log(err.message);
+      })
+  }, 10500);
 
-    putOrder({
-      order_id: order_id,
-      is_complete: true
-    });
 
 
 
-    localStorage.removeItem("order_id");
-    localStorage.removeItem("orders");
-    localStorage.removeItem("item_orders");
+  // setTimeout(function() {
+  //   clearInterval(displayEstimatedTime);
+  //   $(".text").empty();
+  //   $("main p").empty();
+  //   $(".orders").empty();
+  //   $('button').remove();
+  //   const order_id = localStorage.getItem("order_id");
+  //   $(".text").append(`<p>Your order (# ${order_id}) is ready for pickup!`);
 
-  }, estimatedTime * 1000);
+  //   putOrder({
+  //     order_id: order_id,
+  //     is_complete: true
+  //   });
+
+
+
+  //   localStorage.removeItem("order_id");
+  //   localStorage.removeItem("orders");
+  //   localStorage.removeItem("item_orders");
+
+  // }, estimatedTime * 1000);
 
 
 });

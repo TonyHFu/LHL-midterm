@@ -62,6 +62,7 @@ const menuRoutes = require("./routes/menu");
 const ordersRoutes = require("./routes/orders");
 const itemOrdersRoutes = require("./routes/item_orders");
 const notificationRoutes = require("./routes/edit_order");
+const timeRoutes = require("./routes/times");
 
 
 
@@ -72,6 +73,9 @@ app.use("/api/menu", menuRoutes(db));
 app.use("/api/orders", ordersRoutes(db));
 app.use("/api/item_orders", itemOrdersRoutes(db));
 app.use("/api/notify", notificationRoutes(db));
+
+app.use("/api/time", timeRoutes());
+
 
 // Note: mount other resources here, using the same pattern above
 
@@ -87,11 +91,6 @@ app.get("/owner", (req, res) => {
   res.render("owner");
 });
 
-
-
-
-
-
 const orders = {};
 
 app.get("/order", (req, res) => {
@@ -102,15 +101,6 @@ app.get("/order/:id", (req, res) => {
   const orderId = req.params.id;
   orders[orderId] = res;
   res.render("order_page");
-});
-
-
-app.post('/update_time/:id', (req, res) => {
-  const newTime = req.body.newTime;
-  const order_id = req.params.id;
-  console.log("orders", orders);
-  console.log(orders[order_id]);
-  orders[order_id].send(newTime);
 });
 
 
