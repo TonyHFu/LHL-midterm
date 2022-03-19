@@ -156,6 +156,7 @@ $(() => {
                         })
                         .then(updatedTime => {
                           clearInterval(updateCustomerTime);
+                          clearInterval(displayEstimatedTime);
                           $(`#order-${order.id}`).removeClass("borderBlink");
                           $(`#order-${order.id} .order-item`).hide();
                           $(`#order-${order.id} footer`).hide();
