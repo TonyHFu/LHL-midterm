@@ -80,3 +80,11 @@ function getAllOrders() {
     url: "api/orders"
   });
 };
+
+function updateTime(orderId, newTime) {
+  return $.ajax({
+    method: "POST",
+    url: "update_time/" + orderId,
+    data: { newTime }
+  })
+}

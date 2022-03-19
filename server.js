@@ -8,6 +8,8 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cookieSession = require('cookie-session');
+const cors = require('cors');
+
 
 //Twilio
 const twilio = require('twilio');
@@ -34,6 +36,8 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000
 }));
 
+//for sending to order page
+app.use(cors());
 
 
 
@@ -79,12 +83,34 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/owner", (req, res) => {
+  res.render("owner");
+});
+
+
+
+
+
+
+const orders = {};
+
 app.get("/order", (req, res) => {
   res.render("order_page");
 });
 
-app.get("/owner", (req, res) => {
-  res.render("owner");
+app.get("/order/:id", (req, res) => {
+  const orderId = req.params.id;
+  orders[orderId] = res;
+  res.render("order_page");
+});
+
+
+app.post('/update_time/:id', (req, res) => {
+  const newTime = req.body.newTime;
+  const order_id = req.params.id;
+  console.log("orders", orders);
+  console.log(orders[order_id]);
+  orders[order_id].send(newTime);
 });
 
 

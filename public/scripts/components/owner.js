@@ -112,6 +112,14 @@ $(() => {
 
                 $(`#order-${order.id} .change-estimated-time`).on("click", function(event) {
                   $(this).removeClass("update-customer");
+                  const newTime = $(`#order-${order.id} .estimated-time-quantity`).val();
+                  updateTime(order.id, newTime)
+                    .then(ajaxPromise => {
+                      alert("customer order page updated!");
+                    })
+                    .catch(err => {
+                      console.error(err.message);
+                    });
                 });
 
               })

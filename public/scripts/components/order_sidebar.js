@@ -180,7 +180,7 @@ $(() => {
           });
         });
         localStorage.setItem("item_orders", JSON.stringify(item_orders));
-        window.location.href = "/order";
+        window.location.href = "/order/" + localStorage.getItem("order_id");
       })
       .catch(err => {
         console.log(err.message);
