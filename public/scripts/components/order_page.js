@@ -96,6 +96,19 @@ $(() => {
     getTime(order_id)
       .then(newTime => {
         if (newTime.updateId) {
+          if (newTime.orderTime === "done") {
+            clearInterval(displayEstimatedTime);
+            clearInterval(contactServer);
+            $(".text").empty();
+            $("main p").empty();
+            $(".orders").empty();
+            $('button').remove();
+            $(".text").append(`<p>Your order (# ${order_id}) is ready for pickup!`);
+            localStorage.removeItem("order_id");
+            localStorage.removeItem("orders");
+            localStorage.removeItem("item_orders");
+            return;
+          }
           $(".time-estimate").text(newTime.orderTime);
         }
       })
@@ -108,13 +121,13 @@ $(() => {
 
 
   // setTimeout(function() {
-  //   clearInterval(displayEstimatedTime);
-  //   $(".text").empty();
-  //   $("main p").empty();
-  //   $(".orders").empty();
-  //   $('button').remove();
-  //   const order_id = localStorage.getItem("order_id");
-  //   $(".text").append(`<p>Your order (# ${order_id}) is ready for pickup!`);
+    // clearInterval(displayEstimatedTime);
+    // $(".text").empty();
+    // $("main p").empty();
+    // $(".orders").empty();
+    // $('button').remove();
+    // const order_id = localStorage.getItem("order_id");
+    // $(".text").append(`<p>Your order (# ${order_id}) is ready for pickup!`);
 
   //   putOrder({
   //     order_id: order_id,
@@ -123,9 +136,9 @@ $(() => {
 
 
 
-  //   localStorage.removeItem("order_id");
-  //   localStorage.removeItem("orders");
-  //   localStorage.removeItem("item_orders");
+    // localStorage.removeItem("order_id");
+    // localStorage.removeItem("orders");
+    // localStorage.removeItem("item_orders");
 
   // }, estimatedTime * 1000);
 

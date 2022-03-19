@@ -112,14 +112,41 @@ $(() => {
 
                 $(`#order-${order.id} .change-estimated-time`).on("click", function(event) {
                   $(this).removeClass("update-customer");
+                  $(`#order-${order.id}`).removeClass("borderBlink");
+                  //reset setinterval
+                  const displayEstimatedTime = setInterval(() => {
+                    let orderEstimatedTime = $(`#order-${order.id} .estimated-time-quantity`).val();
+                    if (orderEstimatedTime == 0) {
+
+                      $(`#order-${order.id}`).addClass("borderBlink");
+
+                      return clearInterval(displayEstimatedTime);
+                    }
+                    orderEstimatedTime --;
+                    $(`#order-${order.id} .estimated-time-quantity`).val(orderEstimatedTime);
+                  }, 1000);
+
                   const newTime = $(`#order-${order.id} .estimated-time-quantity`).val();
                   updateTime(order.id, newTime)
-                    .then(ajaxPromise => {
-                      alert("customer order page updated!");
-                    })
+                    // .then(ajaxPromise => {
+                      // console("customer order page updated!");
+                    // })
                     .catch(err => {
                       console.error(err.message);
                     });
+                });
+
+                $(`#order-${order.id} .mark-order-done`).on("click", function(event) {
+                      putOrder({
+                        order_id: order.id,
+                        is_complete: true
+                      })
+                        .then(completed => {
+                          updateTime(order.id, "done");
+                        })
+                        .catch(err => {
+                          console.log(err.message);
+                        });
                 });
 
               })

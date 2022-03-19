@@ -62,7 +62,7 @@ module.exports = (db) => {
       RETURNING *;
     `, [order_id])
       .then((order) => {
-        sendText("Your order is ready for pickup!");
+        sendText(`Your order (#${order_id}) is ready for pickup!`);
         res.json(order.rows);
         console.log(order_id);
       })
