@@ -105,6 +105,15 @@ $(() => {
                   orderEstimatedTime --;
                   $(`#order-${order.id} .estimated-time-quantity`).val(orderEstimatedTime);
                 }, 1000);
+
+                $(`#order-${order.id} .estimated-time-quantity`).on("change", function(event) {
+                  $(`#order-${order.id} .change-estimated-time`).addClass("update-customer");
+                });
+
+                $(`#order-${order.id} .change-estimated-time`).on("click", function(event) {
+                  $(this).removeClass("update-customer");
+                });
+
               })
               .catch(err => {
                 console.log(err);
