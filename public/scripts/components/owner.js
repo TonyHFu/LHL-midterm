@@ -136,13 +136,33 @@ $(() => {
                     });
                 });
 
+                const updateCustomerTime = setInterval(function() {
+                  if (!$(`#order-${order.id} .change-estimated-time`).hasClass("update-customer")) {
+                    const newTime = $(`#order-${order.id} .estimated-time-quantity`).val();
+                    updateTime(order.id, newTime)
+                      .catch(err => {
+                        console.error(err.message);
+                      });
+                  }
+                }, 10000);
+
                 $(`#order-${order.id} .mark-order-done`).on("click", function(event) {
                       putOrder({
                         order_id: order.id,
                         is_complete: true
                       })
                         .then(completed => {
-                          updateTime(order.id, "done");
+                          return updateTime(order.id, "done");
+                        })
+                        .then(updatedTime => {
+                          clearInterval(updateCustomerTime);
+                          $(`#order-${order.id}`).removeClass("borderBlink");
+                          $(`#order-${order.id} .order-item`).hide();
+                          $(`#order-${order.id} footer`).hide();
+                          $(`#order-${order.id}`).append(`
+                            <p>You've marked the order complete!</p>
+                          `);
+
                         })
                         .catch(err => {
                           console.log(err.message);
