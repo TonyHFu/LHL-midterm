@@ -60,7 +60,10 @@ $(() => {
           price_cents: price_cents,
           quantity: 1,
           photo: photo,
-          quantity: quantity
+          quantity: quantity,
+          in_stock,
+          prep_time,
+          type
         });
       }
 

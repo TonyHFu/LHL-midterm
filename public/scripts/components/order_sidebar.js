@@ -158,6 +158,11 @@ $(() => {
     postOrder()
       .then(order => {
         const orders = JSON.parse(localStorage.getItem("orders"));
+        let maxPrepTime = 0;
+        orders.forEach(orderItem => {
+          if (orderItem.prep_time > maxPrepTime) maxPrepTime = orderItem.prep_time;
+        });
+        localStorage.setItem("estimated_prep_time", maxPrepTime);
         const order_id = order[0].id;
         localStorage.setItem("order_id", order_id);
         return addItemsToOrder({
@@ -174,7 +179,6 @@ $(() => {
             quantity: submittedOrder.quantity
           });
         });
-
         localStorage.setItem("item_orders", JSON.stringify(item_orders));
         window.location.href = "/order";
       })

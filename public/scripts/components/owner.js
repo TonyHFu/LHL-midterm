@@ -29,6 +29,8 @@ $(() => {
     const menu = JSON.parse(localStorage.getItem("menu"));
     const title = menu[orderItem.item_id].title;
     const photo = menu[orderItem.item_id].photo;
+    const prep_time = menu[orderItem.item_id].prep_time;
+
     console.log(`#order-${orderItem.order_id}`);
     $(`#order-${orderItem.order_id}`).append(`
       <article class="order-item">
@@ -36,6 +38,7 @@ $(() => {
         <p>Title: ${title}</p>
         <img src=${photo}>
         <p>quantity: ${orderItem.quantity}</p>
+        <p>estimated prep time: ${prep_time}</p>
 
       </article>
     `);
@@ -71,9 +74,23 @@ $(() => {
             console.log(order.id);
             getItemsForOrder({ order_id: order.id })
               .then(orderItems => {
+                let estimated_prep_time = 0;
                 orderItems.forEach(orderItem => {
-                  listCustomerOrder(orderItem)
+                  listCustomerOrder(orderItem);
+                  const menu = JSON.parse(localStorage.getItem("menu"));
+                  const prep_time = menu[orderItem.item_id].prep_time;
+                  if (prep_time > estimated_prep_time) {
+                    estimated_prep_time = prep_time;
+                  }
+
                 });
+                $(`#order-${order.id}`).append(`
+                  <footer>
+                    <label for="estimated-time">ETA</label>
+                    <input type="number" value=${estimated_prep_time} name="estimated-time" class="estimated-time-quantity">
+                    <button class="change-estimated-time">Update</button>
+                  </footer>
+                `);
               })
               .catch(err => {
                 console.log(err);

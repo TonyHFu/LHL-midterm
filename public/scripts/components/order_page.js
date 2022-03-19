@@ -1,5 +1,6 @@
 $(() => {
 
+  $(".time-estimate").text(localStorage.getItem("estimated_prep_time"));
 
   function renderOrders(orders) {
     $(".orders").empty();
@@ -39,103 +40,7 @@ $(() => {
         <p class="order-cost">cost: $${price_cents * quantity / 100}</p>
       </div>
     `
-
-        // <!--<p class="quantity-error">
-        //   Must be between 1 and 50
-        //   <i class="fa-solid fa-square-xmark remove-error"></i>
-        // </p>
-
-        // <div>
-        //   <span class="minus">
-        //       <button type="button">
-        //         <i class="fa-solid fa-minus"></i>
-        //       </button>
-        //   </span>
-        //   <input type="number" name="quant" class="quantity" value=${quantity} min=1 max=50>
-        //   <span class="plus">
-        //       <button type="button">
-        //         <i class="fa-solid fa-plus"></i>
-        //       </button>
-        //   </span>
-        //   <button class="remove-from-order" type="submit">Remove</button>
-        // </div>-->
-    // `
     );
-
-
-
-    // $(`#order-item${item_id} .minus`).on("click", function(event) {
-    //   const orders = JSON.parse(localStorage.getItem("orders"));
-
-    //   for (let order of orders) {
-    //     if (order.item_id === item_id) {
-    //       if (order.quantity > 1) {
-    //         order.quantity --;
-    //       }
-    //     }
-    //   }
-
-    //   localStorage.setItem("orders", JSON.stringify(orders));
-
-    //   renderOrders(orders);
-    // });
-
-    // $(`#order-item${item_id} .plus`).on("click", function(event) {
-    //   const orders = JSON.parse(localStorage.getItem("orders"));
-
-    //   for (let order of orders) {
-    //     if (order.item_id === item_id) {
-    //       if (order.quantity < 50) {
-    //         order.quantity ++;
-    //       }
-    //     }
-    //   }
-
-    //   localStorage.setItem("orders", JSON.stringify(orders));
-
-    //   renderOrders(orders);
-    // });
-
-    // $(`#order-item${item_id} .quantity`).on("change", function(event) {
-    //   const orders = JSON.parse(localStorage.getItem("orders"));
-
-    //   $(`#order-item${item_id} .quantity-error`).hide();
-    //   if ($(this).val() < 1 || $(this).val() > 50) {
-    //     for (let order of orders) {
-    //       if (order.item_id === item_id) {
-    //         $(this).val(order.quantity);
-    //       }
-    //     }
-    //     return $(`#order-item${item_id} .quantity-error`).show();
-    //   }
-
-    //   for (let order of orders) {
-    //     if (order.item_id === item_id) {
-    //       order.quantity = $(this).val();
-    //     }
-    //   }
-
-    //   localStorage.setItem("orders", JSON.stringify(orders));
-
-    //   renderOrders(orders);
-    // });
-
-    // $(`#order-item${item_id} .remove-error`).on("click", function(event) {
-    //   $(`#order-item${item_id} .quantity-error`).hide();
-    // });
-
-    // $(`#order-item${item_id} .remove-from-order`).on("click", function(event) {
-
-    //   const orders = JSON.parse(localStorage.getItem("orders"));
-
-    //   const updatedOrders = orders.filter(order => {
-    //     return order.item_id !== item_id;
-    //   });
-
-    //   localStorage.setItem("orders", JSON.stringify(updatedOrders));
-
-    //   renderOrders(updatedOrders);
-    // });
   }
 
 
@@ -173,7 +78,7 @@ $(() => {
 
   renderOrders(orders);
 
-  let estimatedTime = 40;
+  let estimatedTime = Number($(".time-estimate").text());
 
   const displayEstimatedTime = setInterval(function() {
     estimatedTime -= 1;
