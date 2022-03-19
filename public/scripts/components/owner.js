@@ -44,6 +44,7 @@ $(() => {
     `);
   };
 
+  const displaysForEstimatedTime = [];
 
   const newMenu = {};
   getAllMenuItems()
@@ -89,8 +90,21 @@ $(() => {
                     <label for="estimated-time">ETA</label>
                     <input type="number" value=${estimated_prep_time} name="estimated-time" class="estimated-time-quantity">
                     <button class="change-estimated-time">Update</button>
+                    <button class="mark-order-done">Done</button>
                   </footer>
                 `);
+
+                const displayEstimatedTime = setInterval(() => {
+                  let orderEstimatedTime = $(`#order-${order.id} .estimated-time-quantity`).val();
+                  if (orderEstimatedTime == 0) {
+
+                    $(`#order-${order.id}`).addClass("borderBlink");
+
+                    return clearInterval(displayEstimatedTime);
+                  }
+                  orderEstimatedTime --;
+                  $(`#order-${order.id} .estimated-time-quantity`).val(orderEstimatedTime);
+                }, 1000);
               })
               .catch(err => {
                 console.log(err);

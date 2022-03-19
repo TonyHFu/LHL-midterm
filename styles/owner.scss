@@ -53,3 +53,26 @@ img {
 .estimated-time-quantity {
   width: 100px;
 }
+
+@-webkit-keyframes borderBlink {
+  from, to {
+      border-color: black;
+  }
+  50% {
+      border-color: red;
+  }
+}
+@keyframes borderBlink {
+  from, to {
+      border-color: black;
+  }
+  50% {
+      border-color: red;
+  }
+}
+
+.borderBlink {
+  border: 3px solid black;
+  -webkit-animation: borderBlink 1s step-end infinite;
+  animation: borderBlink 1s step-end infinite;
+}
